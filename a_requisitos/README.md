@@ -22,6 +22,7 @@ Requisitos del Trabajo Práctico Nº 3 de Informática Industrial, tomados del e
 
 | Archivo | Contenido |
 |---|---|
+| [`escenario-planta.md`](escenario-planta.md) | Caso de estudio: la empresa ficticia, su proceso productivo, los activos, el área de mantenimiento y el alcance del sistema. |
 | [`requisitos-generales.md`](requisitos-generales.md) | Propósito, audiencia, alcance, idioma, origen y restricciones del informe. |
 | [`fase1-investigacion.md`](fase1-investigacion.md) | Fase I — Pasos 1 y 2: conceptos de BD y entorno RDBMS. |
 | [`fase2-planificacion.md`](fase2-planificacion.md) | Fase II — Pasos 3 y 4: entidades, atributos, tipos de datos y DER. |
@@ -45,11 +46,12 @@ Se trabaja una fase por vez y no se avanza sin validar la anterior. La **parte d
 | # | Parte | Contenido | Estado |
 |---|---|---|---|
 | 1 | Portada (automática, desde `diseno-utn.md`) | Universidad, carrera, asignatura, TP Nº 3 — Grupo Nº 4, título, docente/s, integrantes, lugar y fecha. | Lista |
-| 2 | `fase1-investigacion.md` | Pasos 1 y 2. | Redactada, con capturas; falta revisión del grupo |
-| 3 | `fase2-planificacion.md` | Pasos 3 y 4. **Parte de muestra.** | Modelo de 7 tablas verificado; en revisión del grupo |
-| 4 | `fase3-construccion.md` | Pasos 5 y 6. | Scripts verificados, con capturas |
-| 5 | `fase4-explotacion.md` | Pasos 7, 8 y 9. | Redactada y verificada (7 consultas), con capturas |
-| 6 | `referencias.md` | Fuentes citadas. | Lista (16 fuentes) |
+| 2 | `introduccion.md` | Contexto, objetivo, caso de estudio (Autopartes G4 S.A.), alcance y organización del informe. | Lista |
+| 3 | `fase1-investigacion.md` | Pasos 1 y 2. | Redactada, con capturas; falta revisión del grupo |
+| 4 | `fase2-planificacion.md` | Pasos 3 y 4. **Parte de muestra.** | Modelo de 7 tablas verificado; en revisión del grupo |
+| 5 | `fase3-construccion.md` | Pasos 5 y 6. | Scripts verificados, con capturas |
+| 6 | `fase4-explotacion.md` | Pasos 7, 8 y 9. | Redactada y verificada (7 consultas), con capturas |
+| 7 | `referencias.md` | Fuentes citadas. | Lista (16 fuentes) |
 | — | `tp3-gmao.sql` | Script de respaldo; lo arma `c_prototipado/sql/verificar.py`. | Completo (DDL, DML y consultas), al día |
 
 ## Decisiones tomadas (2026-10-19)
