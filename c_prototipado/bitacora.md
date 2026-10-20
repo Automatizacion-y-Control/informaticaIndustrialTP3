@@ -79,3 +79,11 @@ Registro del desarrollo: cada parte cerrada, las decisiones tomadas con el grupo
 - `diseño.md`: se agregó `fase4-explotacion.md` a `fuentes`.
 - Capturas pendientes (Ejecutar SQL, consulta seleccionada + grilla de resultados), marcadas con comentarios `CAPTURA`: `paso7_01`, `paso7_02`, `paso7_03`, `paso8_01`, `paso8_02`, `paso9_01`, `paso9_02`.
 - Pendiente con OK del grupo: `python verificar.py --armar` para sumar las consultas a `d_presentacion/tp3-gmao.sql`, y regenerar el PDF.
+
+## 2026-10-19 — Entregables armados y repositorio
+
+- `verificar.py`: sin errores. Con `--armar` se sumaron las 7 consultas a `d_presentacion/tp3-gmao.sql`.
+- PDF regenerado: 42 páginas, 17 figuras y ningún aviso. Se revisaron todas las páginas; las capturas se leen bien en A4.
+- Repositorio git inicializado en la rama `main`. Los commits siguen las fases del enunciado: requisitos, Fases I a IV, verificación, entregables y documentación. Mensajes en español y sin firma.
+- `.gitignore`: `.vscode/`, archivos auxiliares de SQLite, `__pycache__/`, proyectos de DB Browser y la base de prueba vieja `sql/verificacion.db`.
+- Pendiente: capturas de la Fase IV (`paso7_01` a `paso9_02`) y volver a generar el PDF.

@@ -28,8 +28,9 @@ Trabajo Práctico Nº 3 de **Informática Industrial** (UTN — Facultad Regiona
 Pendiente para cerrar la entrega:
 
 - [ ] Capturas de la Fase IV: `paso7_01` a `paso7_03`, `paso8_01`, `paso8_02`, `paso9_01` y `paso9_02`.
-- [ ] Sumar las consultas al `.sql` de respaldo (`python c_prototipado/sql/verificar.py --armar`).
-- [ ] Regenerar el PDF y revisar todas las páginas.
+- [x] Sumar las consultas al `.sql` de respaldo (`python c_prototipado/sql/verificar.py --armar`).
+- [x] Regenerar el PDF (42 páginas) y revisar todas las páginas.
+- [ ] Volver a generar el PDF cuando estén las capturas de la Fase IV.
 - [ ] Revisión del grupo del Paso 1 («con sus propias palabras») y control final con [`a_requisitos/criterios-aceptacion.md`](a_requisitos/criterios-aceptacion.md).
 
 El detalle de cada avance y de cada decisión está en la [bitácora](c_prototipado/bitacora.md).
