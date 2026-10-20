@@ -1,0 +1,26 @@
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.obsidian/
+# Configuración local de VS Code (tiene rutas propias de cada equipo)
+.vscode/
+
+# Temporales y archivos de bloqueo de Office
+*.tmp
+.tmp/
+~$*
+
+# Python
+__pycache__/
+*.pyc
+
+# SQLite: archivos auxiliares que crea el motor mientras la base está abierta
+*.db-journal
+*.db-wal
+*.db-shm
+# Base de prueba de versiones anteriores de verificar.py (hoy trabaja en una carpeta temporal)
+c_prototipado/sql/verificacion.db
+
+# DB Browser for SQLite: archivos de proyecto personales
+*.sqbpro

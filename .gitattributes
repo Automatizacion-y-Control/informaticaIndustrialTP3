@@ -1,0 +1,19 @@
+# Texto: fin de línea LF en el repositorio
+* text=auto eol=lf
+*.md text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.sql text eol=lf
+*.py text eol=lf
+
+# Binarios
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.svg binary
+*.ttf binary
+*.otf binary
+*.db binary
