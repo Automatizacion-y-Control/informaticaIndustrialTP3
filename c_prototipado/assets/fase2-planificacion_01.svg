@@ -1,0 +1,247 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1070 854' width='1070' height='854'>
+<rect width='1070' height='854' fill='#FFFFFF'/>
+<rect x='10' y='10' width='290' height='230' rx='4' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.5'/>
+<path d='M10 42 V14 Q10 10 14 10 H296 Q300 10 300 14 V42 Z' fill='#1F3A5F'/>
+<text x='155.0' y='31' text-anchor='middle' font-family='Liberation Sans, Arial, sans-serif' font-size='16' font-weight='bold' fill='#FFFFFF'>fallas</text>
+<rect x='11' y='42' width='288' height='24' fill='#F3F5F8'/>
+<text x='18' y='59' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#1F3A5F'>PK</text>
+<text x='72' y='59' font-family='Liberation Sans, Arial, sans-serif' font-size='15' font-weight='bold' fill='#222222'>id_falla</text>
+<text x='292' y='59' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='18' y='83' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#2E5A88'>FK</text>
+<text x='72' y='83' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>id_maquina</text>
+<text x='292' y='83' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='18' y='107' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#2E5A88'>FK</text>
+<text x='72' y='107' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>id_ot</text>
+<text x='292' y='107' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='18' y='131' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='131' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>fecha_hora</text>
+<text x='292' y='131' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>DATETIME</text>
+<text x='18' y='155' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='155' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>descripcion</text>
+<text x='292' y='155' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(200)</text>
+<text x='18' y='179' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='179' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>tipo_falla</text>
+<text x='292' y='179' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(15)</text>
+<text x='18' y='203' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='203' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>severidad</text>
+<text x='292' y='203' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(5)</text>
+<text x='18' y='227' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='227' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>horas_parada</text>
+<text x='292' y='227' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>FLOAT</text>
+<rect x='10' y='300' width='290' height='254' rx='4' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.5'/>
+<path d='M10 332 V304 Q10 300 14 300 H296 Q300 300 300 304 V332 Z' fill='#1F3A5F'/>
+<text x='155.0' y='321' text-anchor='middle' font-family='Liberation Sans, Arial, sans-serif' font-size='16' font-weight='bold' fill='#FFFFFF'>maquinas</text>
+<rect x='11' y='332' width='288' height='24' fill='#F3F5F8'/>
+<text x='18' y='349' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#1F3A5F'>PK</text>
+<text x='72' y='349' font-family='Liberation Sans, Arial, sans-serif' font-size='15' font-weight='bold' fill='#222222'>id_maquina</text>
+<text x='292' y='349' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='18' y='373' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#2E5A88'>UK</text>
+<text x='72' y='373' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>codigo</text>
+<text x='292' y='373' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(10)</text>
+<text x='18' y='397' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='397' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>nombre</text>
+<text x='292' y='397' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(60)</text>
+<text x='18' y='421' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='421' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>marca</text>
+<text x='292' y='421' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(40)</text>
+<text x='18' y='445' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='445' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>modelo</text>
+<text x='292' y='445' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(40)</text>
+<text x='18' y='469' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='469' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>sector</text>
+<text x='292' y='469' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(40)</text>
+<text x='18' y='493' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='493' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>fecha_instalacion</text>
+<text x='292' y='493' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>DATE</text>
+<text x='18' y='517' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='517' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>horas_operacion</text>
+<text x='292' y='517' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>FLOAT</text>
+<text x='18' y='541' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='541' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>criticidad</text>
+<text x='292' y='541' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(5)</text>
+<rect x='10' y='614' width='290' height='230' rx='4' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.5'/>
+<path d='M10 646 V618 Q10 614 14 614 H296 Q300 614 300 618 V646 Z' fill='#1F3A5F'/>
+<text x='155.0' y='635' text-anchor='middle' font-family='Liberation Sans, Arial, sans-serif' font-size='16' font-weight='bold' fill='#FFFFFF'>planes_preventivos</text>
+<rect x='11' y='646' width='288' height='24' fill='#F3F5F8'/>
+<text x='18' y='663' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#1F3A5F'>PK</text>
+<text x='72' y='663' font-family='Liberation Sans, Arial, sans-serif' font-size='15' font-weight='bold' fill='#222222'>id_plan</text>
+<text x='292' y='663' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='18' y='687' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#2E5A88'>UK</text>
+<text x='72' y='687' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>codigo</text>
+<text x='292' y='687' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(15)</text>
+<text x='18' y='711' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#2E5A88'>FK</text>
+<text x='72' y='711' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>id_maquina</text>
+<text x='292' y='711' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='18' y='735' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='735' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>tarea</text>
+<text x='292' y='735' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(200)</text>
+<text x='18' y='759' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='759' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>frecuencia</text>
+<text x='292' y='759' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='18' y='783' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='783' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>unidad_frecuencia</text>
+<text x='292' y='783' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(5)</text>
+<text x='18' y='807' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='807' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>especialidad</text>
+<text x='292' y='807' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(20)</text>
+<text x='18' y='831' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='72' y='831' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>duracion_estimada_h</text>
+<text x='292' y='831' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>FLOAT</text>
+<rect x='390' y='200' width='290' height='302' rx='4' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.5'/>
+<path d='M390 232 V204 Q390 200 394 200 H676 Q680 200 680 204 V232 Z' fill='#1F3A5F'/>
+<text x='535.0' y='221' text-anchor='middle' font-family='Liberation Sans, Arial, sans-serif' font-size='16' font-weight='bold' fill='#FFFFFF'>ordenes_trabajo</text>
+<rect x='391' y='232' width='288' height='24' fill='#F3F5F8'/>
+<text x='398' y='249' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#1F3A5F'>PK</text>
+<text x='452' y='249' font-family='Liberation Sans, Arial, sans-serif' font-size='15' font-weight='bold' fill='#222222'>id_ot</text>
+<text x='672' y='249' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='398' y='273' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#2E5A88'>UK</text>
+<text x='452' y='273' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>nro_ot</text>
+<text x='672' y='273' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(15)</text>
+<text x='398' y='297' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='452' y='297' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>tipo</text>
+<text x='672' y='297' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(12)</text>
+<text x='398' y='321' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#2E5A88'>FK</text>
+<text x='452' y='321' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>id_maquina</text>
+<text x='672' y='321' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='398' y='345' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#2E5A88'>FK</text>
+<text x='452' y='345' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>id_plan</text>
+<text x='672' y='345' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='398' y='369' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#2E5A88'>FK</text>
+<text x='452' y='369' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>id_tecnico</text>
+<text x='672' y='369' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='398' y='393' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='452' y='393' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>fecha_emision</text>
+<text x='672' y='393' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>DATETIME</text>
+<text x='398' y='417' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='452' y='417' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>fecha_cierre</text>
+<text x='672' y='417' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>DATETIME</text>
+<text x='398' y='441' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='452' y='441' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>estado</text>
+<text x='672' y='441' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(10)</text>
+<text x='398' y='465' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='452' y='465' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>tarea</text>
+<text x='672' y='465' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(200)</text>
+<text x='398' y='489' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='452' y='489' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>horas_hombre</text>
+<text x='672' y='489' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>FLOAT</text>
+<rect x='390' y='562' width='290' height='110' rx='4' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.5'/>
+<path d='M390 594 V566 Q390 562 394 562 H676 Q680 562 680 566 V594 Z' fill='#1F3A5F'/>
+<text x='535.0' y='583' text-anchor='middle' font-family='Liberation Sans, Arial, sans-serif' font-size='16' font-weight='bold' fill='#FFFFFF'>ot_repuestos</text>
+<rect x='391' y='594' width='288' height='24' fill='#F3F5F8'/>
+<text x='398' y='611' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#1F3A5F'>PK, FK</text>
+<text x='452' y='611' font-family='Liberation Sans, Arial, sans-serif' font-size='15' font-weight='bold' fill='#222222'>id_ot</text>
+<text x='672' y='611' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<rect x='391' y='618' width='288' height='24' fill='#F3F5F8'/>
+<text x='398' y='635' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#1F3A5F'>PK, FK</text>
+<text x='452' y='635' font-family='Liberation Sans, Arial, sans-serif' font-size='15' font-weight='bold' fill='#222222'>id_repuesto</text>
+<text x='672' y='635' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='398' y='659' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='452' y='659' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>cantidad</text>
+<text x='672' y='659' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<rect x='770' y='320' width='290' height='206' rx='4' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.5'/>
+<path d='M770 352 V324 Q770 320 774 320 H1056 Q1060 320 1060 324 V352 Z' fill='#1F3A5F'/>
+<text x='915.0' y='341' text-anchor='middle' font-family='Liberation Sans, Arial, sans-serif' font-size='16' font-weight='bold' fill='#FFFFFF'>tecnicos</text>
+<rect x='771' y='352' width='288' height='24' fill='#F3F5F8'/>
+<text x='778' y='369' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#1F3A5F'>PK</text>
+<text x='832' y='369' font-family='Liberation Sans, Arial, sans-serif' font-size='15' font-weight='bold' fill='#222222'>id_tecnico</text>
+<text x='1052' y='369' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='778' y='393' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#2E5A88'>UK</text>
+<text x='832' y='393' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>legajo</text>
+<text x='1052' y='393' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(10)</text>
+<text x='778' y='417' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='832' y='417' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>nombre</text>
+<text x='1052' y='417' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(40)</text>
+<text x='778' y='441' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='832' y='441' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>apellido</text>
+<text x='1052' y='441' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(40)</text>
+<text x='778' y='465' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='832' y='465' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>especialidad</text>
+<text x='1052' y='465' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(20)</text>
+<text x='778' y='489' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='832' y='489' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>turno</text>
+<text x='1052' y='489' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(10)</text>
+<text x='778' y='513' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='832' y='513' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>telefono</text>
+<text x='1052' y='513' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(20)</text>
+<rect x='770' y='586' width='290' height='206' rx='4' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.5'/>
+<path d='M770 618 V590 Q770 586 774 586 H1056 Q1060 586 1060 590 V618 Z' fill='#1F3A5F'/>
+<text x='915.0' y='607' text-anchor='middle' font-family='Liberation Sans, Arial, sans-serif' font-size='16' font-weight='bold' fill='#FFFFFF'>repuestos</text>
+<rect x='771' y='618' width='288' height='24' fill='#F3F5F8'/>
+<text x='778' y='635' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#1F3A5F'>PK</text>
+<text x='832' y='635' font-family='Liberation Sans, Arial, sans-serif' font-size='15' font-weight='bold' fill='#222222'>id_repuesto</text>
+<text x='1052' y='635' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='778' y='659' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#2E5A88'>UK</text>
+<text x='832' y='659' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>codigo</text>
+<text x='1052' y='659' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(15)</text>
+<text x='778' y='683' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='832' y='683' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>descripcion</text>
+<text x='1052' y='683' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(100)</text>
+<text x='778' y='707' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='832' y='707' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>marca</text>
+<text x='1052' y='707' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>VARCHAR(40)</text>
+<text x='778' y='731' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='832' y='731' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>stock_actual</text>
+<text x='1052' y='731' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='778' y='755' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='832' y='755' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>stock_minimo</text>
+<text x='1052' y='755' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>INTEGER</text>
+<text x='778' y='779' font-family='Liberation Sans, Arial, sans-serif' font-size='12' font-weight='bold' fill='#666666'></text>
+<text x='832' y='779' font-family='Liberation Sans, Arial, sans-serif' font-size='15' fill='#222222'>costo_unitario</text>
+<text x='1052' y='779' text-anchor='end' font-family='Liberation Mono, Consolas, monospace' font-size='12.5' fill='#666666'>FLOAT</text>
+<path d='M80 300 L80 240' fill='none' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='88' y1='293' x2='72' y2='293' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='88' y1='287' x2='72' y2='287' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='80' y1='254' x2='71' y2='240' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='80' y1='254' x2='80' y2='240' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='80' y1='254' x2='89' y2='240' stroke='#2E5A88' stroke-width='1.6'/>
+<circle cx='80' cy='261' r='5' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.6'/>
+<path d='M80 554 L80 614' fill='none' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='72' y1='561' x2='88' y2='561' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='72' y1='567' x2='88' y2='567' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='80' y1='600' x2='89' y2='614' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='80' y1='600' x2='80' y2='614' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='80' y1='600' x2='71' y2='614' stroke='#2E5A88' stroke-width='1.6'/>
+<circle cx='80' cy='593' r='5' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.6'/>
+<path d='M300 102 L320 102 L320 244 L390 244' fill='none' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='314' y1='102' x2='300' y2='111' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='314' y1='102' x2='300' y2='102' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='314' y1='102' x2='300' y2='93' stroke='#2E5A88' stroke-width='1.6'/>
+<circle cx='321' cy='102' r='5' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='383' y1='236' x2='383' y2='252' stroke='#2E5A88' stroke-width='1.6'/>
+<circle cx='371' cy='244' r='5' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.6'/>
+<path d='M300 344 L345 344 L345 316 L390 316' fill='none' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='307' y1='352' x2='307' y2='336' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='313' y1='352' x2='313' y2='336' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='376' y1='316' x2='390' y2='307' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='376' y1='316' x2='390' y2='316' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='376' y1='316' x2='390' y2='325' stroke='#2E5A88' stroke-width='1.6'/>
+<circle cx='369' cy='316' r='5' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.6'/>
+<path d='M300 658 L370 658 L370 340 L390 340' fill='none' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='307' y1='666' x2='307' y2='650' stroke='#2E5A88' stroke-width='1.6'/>
+<circle cx='319' cy='658' r='5' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='376' y1='340' x2='390' y2='331' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='376' y1='340' x2='390' y2='340' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='376' y1='340' x2='390' y2='349' stroke='#2E5A88' stroke-width='1.6'/>
+<circle cx='369' cy='340' r='5' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.6'/>
+<path d='M680 364 L770 364' fill='none' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='763' y1='356' x2='763' y2='372' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='757' y1='356' x2='757' y2='372' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='694' y1='364' x2='680' y2='373' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='694' y1='364' x2='680' y2='364' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='694' y1='364' x2='680' y2='355' stroke='#2E5A88' stroke-width='1.6'/>
+<circle cx='701' cy='364' r='5' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.6'/>
+<path d='M535.0 502 L535.0 562' fill='none' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='527.0' y1='509' x2='543.0' y2='509' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='527.0' y1='515' x2='543.0' y2='515' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='535.0' y1='548' x2='544.0' y2='562' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='535.0' y1='548' x2='535.0' y2='562' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='535.0' y1='548' x2='526.0' y2='562' stroke='#2E5A88' stroke-width='1.6'/>
+<circle cx='535.0' cy='541' r='5' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.6'/>
+<path d='M680 630 L770 630' fill='none' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='763' y1='622' x2='763' y2='638' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='757' y1='622' x2='757' y2='638' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='694' y1='630' x2='680' y2='639' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='694' y1='630' x2='680' y2='630' stroke='#2E5A88' stroke-width='1.6'/>
+<line x1='694' y1='630' x2='680' y2='621' stroke='#2E5A88' stroke-width='1.6'/>
+<circle cx='701' cy='630' r='5' fill='#FFFFFF' stroke='#2E5A88' stroke-width='1.6'/>
+</svg>
