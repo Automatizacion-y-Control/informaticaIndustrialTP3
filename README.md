@@ -23,15 +23,14 @@ Trabajo Práctico Nº 3 de **Informática Industrial** (UTN — Facultad Regiona
 | I — Investigación | 1. Bases de datos y usos industriales · 2. Motor y requerimientos | ✅ | ✅ (4) |
 | II — Planificación | 3. Entidades y atributos · 4. Modelo relacional (DER) | ✅ | — (el DER es un diagrama) |
 | III — Construcción | 5. `CREATE TABLE` · 6. `INSERT INTO` | ✅ | ✅ (11) |
-| IV — Consulta | 7. Filtrado · 8. Agrupaciones · 9. `JOIN` | ✅ | ⏳ faltan 7 |
+| IV — Consulta | 7. Filtrado · 8. Agrupaciones · 9. `JOIN` | ✅ | ✅ (7) |
 
-Pendiente para cerrar la entrega:
+Los dos entregables están completos y verificados: el informe tiene 46 páginas, con las 22 capturas, y el `.sql` contiene creación, carga y consultas. El control final contra el enunciado está en [`a_requisitos/criterios-aceptacion.md`](a_requisitos/criterios-aceptacion.md).
 
-- [ ] Capturas de la Fase IV: `paso7_01` a `paso7_03`, `paso8_01`, `paso8_02`, `paso9_01` y `paso9_02`.
-- [x] Sumar las consultas al `.sql` de respaldo (`python c_prototipado/sql/verificar.py --armar`).
-- [x] Regenerar el PDF (42 páginas) y revisar todas las páginas.
-- [ ] Volver a generar el PDF cuando estén las capturas de la Fase IV.
-- [ ] Revisión del grupo del Paso 1 («con sus propias palabras») y control final con [`a_requisitos/criterios-aceptacion.md`](a_requisitos/criterios-aceptacion.md).
+Pendiente del grupo:
+
+- [ ] Revisar la redacción del Paso 1 («con sus propias palabras»). Si se cambia, regenerar el PDF.
+- [ ] Subir el PDF y el `.sql` antes del 28/10/2026 a las 23:59.
 
 El detalle de cada avance y de cada decisión está en la [bitácora](c_prototipado/bitacora.md).
 
@@ -79,7 +78,7 @@ Dentro de `c_prototipado/`:
 
 1. Abrir `c_prototipado/gmao.db` en DB Browser (**Abrir base de datos**).
 2. Para recrearla desde cero, en la pestaña **Ejecutar SQL** ejecutar `sql/paso5-ddl.sql` y después `sql/paso6-dml.sql` (`F5`), y **Guardar cambios** (`Ctrl+S`). El DDL borra y vuelve a crear las tablas, así que se puede repetir.
-3. Las consultas de la Fase IV están en `sql/fase4-consultas.sql`. Para ver el resultado de una, se selecciona y se ejecuta con `Ctrl+Retorno`.
+3. Las consultas de la Fase IV están en `sql/fase4-consultas.sql`. Para ver el resultado de una, se selecciona y se ejecuta con `F5` (o `Ctrl+Retorno`): con texto seleccionado, DB Browser ejecuta solo la selección.
 
 ## Scripts auxiliares
 

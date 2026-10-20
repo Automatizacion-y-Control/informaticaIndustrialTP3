@@ -87,3 +87,19 @@ Registro del desarrollo: cada parte cerrada, las decisiones tomadas con el grupo
 - Repositorio git inicializado en la rama `main`. Los commits siguen las fases del enunciado: requisitos, Fases I a IV, verificación, entregables y documentación. Mensajes en español y sin firma.
 - `.gitignore`: `.vscode/`, archivos auxiliares de SQLite, `__pycache__/`, proyectos de DB Browser y la base de prueba vieja `sql/verificacion.db`.
 - Pendiente: capturas de la Fase IV (`paso7_01` a `paso9_02`) y volver a generar el PDF.
+
+## 2026-10-19 — Capturas y revisión de la Fase IV
+
+- Las 7 capturas se tomaron en DB Browser for SQLite 3.13.1 sobre `gmao.db` (solo consultas, sin cambios en la base) con la Herramienta Recortes y se guardaron en `assets/` como PNG de 1741 × 1001: `paso7_01` a `paso7_03`, `paso8_01`, `paso8_02`, `paso9_01` y `paso9_02`. Mismo criterio que las de la Fase III: interfaz en español y sin paneles laterales.
+- Cada consulta se ejecutó sola en el editor con **Ejecutar todo** (`F5`). Se ensancharon las columnas de texto para que se lean completas, y en la 9.1 se agrandó la grilla para mostrar las 14 filas.
+- Los comentarios `CAPTURA` de `armar-fase4.py` se reemplazaron por las imágenes y se regeneró `fase4-explotacion.md`.
+- Revisión independiente del informe contra la base: todos los números son correctos. Se corrigió la teoría para SQLite: el alias en el `WHERE` y las columnas sin agregar con `GROUP BY` son extensiones de SQLite, no SQL estándar. También se aclaró `OR` frente a `IN` y el `NULL` con `||`, y «duplica» pasó a «casi el doble».
+- `verificar.py`: sin errores; `d_presentacion/tp3-gmao.sql` al día.
+- Pendiente: regenerar el PDF con las capturas de la Fase IV.
+
+## 2026-10-19 — Cierre del informe
+
+- Se revisaron las 7 capturas de la Fase IV: cada una coincide con su epígrafe y con los resultados de `verificar.py` (5, 4, 2, 6, 2, 14 y 6 filas).
+- PDF regenerado: 46 páginas, 24 figuras, 18 tablas y ningún aviso. Se revisaron todas las páginas. Fuentes Type0, ninguna Type 3; 21 enlaces activos.
+- Check-list de `a_requisitos/criterios-aceptacion.md` completo, salvo la entrega.
+- Pendiente del grupo: revisión de la redacción del Paso 1 y la entrega antes del 28/10/2026 a las 23:59.

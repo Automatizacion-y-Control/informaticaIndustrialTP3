@@ -48,9 +48,9 @@ Se trabaja una fase por vez y no se avanza sin validar la anterior. La **parte d
 | 2 | `fase1-investigacion.md` | Pasos 1 y 2. | Redactada, con capturas; falta revisión del grupo |
 | 3 | `fase2-planificacion.md` | Pasos 3 y 4. **Parte de muestra.** | Modelo de 7 tablas verificado; en revisión del grupo |
 | 4 | `fase3-construccion.md` | Pasos 5 y 6. | Scripts verificados, con capturas |
-| 5 | `fase4-explotacion.md` | Pasos 7, 8 y 9. | Redactada y verificada (7 consultas); faltan capturas `paso7_01` a `paso9_02` |
+| 5 | `fase4-explotacion.md` | Pasos 7, 8 y 9. | Redactada y verificada (7 consultas), con capturas |
 | 6 | `referencias.md` | Fuentes citadas. | Lista (16 fuentes) |
-| — | `tp3-gmao.sql` | Script de respaldo; lo arma `c_prototipado/sql/verificar.py`. | DDL, DML y consultas listos; falta `verificar.py --armar` con OK del grupo |
+| — | `tp3-gmao.sql` | Script de respaldo; lo arma `c_prototipado/sql/verificar.py`. | Completo (DDL, DML y consultas), al día |
 
 ## Decisiones tomadas (2026-10-19)
 
