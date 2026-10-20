@@ -17,7 +17,7 @@ SELECT columnas FROM tabla WHERE condicion ORDER BY columna [ASC | DESC];
 - `WHERE` filtra las filas: solo pasan las que cumplen la condición.
 - `ORDER BY` ordena el resultado. Por defecto es ascendente (`ASC`); `DESC` invierte el orden.
 
-Aunque se escribe en ese orden, el motor la evalúa en otro: primero `FROM`, después `WHERE`, luego `SELECT` y al final `ORDER BY`. Por eso un alias definido en el `SELECT` se puede usar en el `ORDER BY` pero no en el `WHERE`.
+Aunque se escribe en ese orden, el motor la evalúa en otro: primero `FROM`, después `WHERE`, luego `SELECT` y al final `ORDER BY`. Por eso, en SQL estándar, un alias definido en el `SELECT` se puede usar en el `ORDER BY` pero no en el `WHERE`. SQLite lo acepta también en el `WHERE` como extensión propia, pero no es portable a otros motores y en este trabajo no se usa.
 
 La condición del `WHERE` se arma con operadores de comparación y operadores lógicos:
 
@@ -25,7 +25,7 @@ La condición del `WHERE` se arma con operadores de comparación y operadores l�
 |---|---|---|
 | `=`, `<>`, `<`, `<=`, `>`, `>=` | Comparación | `stock_actual <= stock_minimo` |
 | `AND` | Se cumplen las dos condiciones | Rango de fechas y severidad |
-| `OR` | Se cumple al menos una | Equivale a una lista de `IN` |
+| `OR` | Se cumple al menos una | `severidad IN ('ALTA', 'MEDIA')` equivale a `severidad = 'ALTA' OR severidad = 'MEDIA'` |
 | `NOT` | Niega la condición | `NOT estado = 'CERRADA'` |
 | `BETWEEN a AND b` | Rango, con los dos extremos incluidos | Fechas de las fallas |
 | `IN (…)` | El valor está en la lista | `severidad IN ('ALTA', 'MEDIA')` |
@@ -35,7 +35,7 @@ Las fechas se guardaron como texto en formato ISO 8601 (`AAAA-MM-DD HH:MM:SS`). 
 ### Procedimiento
 
 1. Se abrió `gmao.db` en DB Browser for SQLite y se pasó a la pestaña **Ejecutar SQL**.
-2. Se escribió cada consulta, se la seleccionó y se ejecutó con **Ejecutar todo** (`F5`): con texto seleccionado, DB Browser ejecuta solo la selección.
+2. Se escribió cada consulta sola en el editor y se ejecutó con **Ejecutar todo** (`F5`). Si hay texto seleccionado, DB Browser ejecuta solo la selección.
 3. Se revisó el resultado en la grilla inferior y la cantidad de filas en el panel de mensajes.
 4. Como las consultas solo leen, no hubo cambios que guardar.
 
@@ -56,9 +56,9 @@ WHERE fecha_hora BETWEEN '2026-09-15 00:00:00' AND '2026-10-10 23:59:59'
 ORDER BY fecha_hora;
 ```
 
-<!-- CAPTURA paso7_01: Ejecutar SQL con la consulta 7.1 y su resultado (5 filas) -->
+![Consulta 7.1 en Ejecutar SQL: 5 fallas de severidad ALTA o MEDIA entre el 15/09 y el 10/10](./assets/paso7_01.png)
 
-**Resultado:** cinco fallas entre el 15/09 y el 10/10. La falla de severidad baja de la inyectora (12/10) queda afuera por la fecha y por la severidad.
+**Resultado:** cinco fallas entre el 15/09 y el 10/10. Por fecha quedan afuera las fallas del 02/09, 05/09, 10/09 y 15/10; la de la inyectora (12/10) queda afuera por la fecha y por su severidad baja.
 
 ### Consulta 7.2 — Repuestos con stock crítico
 
@@ -77,7 +77,7 @@ WHERE stock_actual <= stock_minimo
 ORDER BY faltante DESC, codigo;
 ```
 
-<!-- CAPTURA paso7_02: Ejecutar SQL con la consulta 7.2 y su resultado (4 filas) -->
+![Consulta 7.2 en Ejecutar SQL: 4 repuestos en el stock mínimo o por debajo](./assets/paso7_02.png)
 
 **Resultado:** cuatro repuestos. El filtro del compresor (faltan 2) y la placa SMB del robot (stock 0) están por debajo del mínimo; la correa del torno y el kit de sellos de la prensa están justo en el mínimo.
 
@@ -97,7 +97,7 @@ WHERE tipo = 'CORRECTIVA'
 ORDER BY fecha_emision;
 ```
 
-<!-- CAPTURA paso7_03: Ejecutar SQL con la consulta 7.3 y su resultado (2 filas) -->
+![Consulta 7.3 en Ejecutar SQL: 2 órdenes correctivas abiertas](./assets/paso7_03.png)
 
 **Resultado:** dos órdenes abiertas: el cambio de rodamiento del torno CNC (en curso desde el 07/10) y el diagnóstico del cambiador de herramientas del centro de mecanizado (pendiente). Las órdenes preventivas abiertas no aparecen porque el filtro pide solo correctivas.
 
@@ -114,13 +114,13 @@ Las **funciones de agregación** resumen un conjunto de filas en un solo valor:
 | `AVG(columna)` | Promedio de los valores |
 | `MAX(columna)` / `MIN(columna)` | Valor máximo / mínimo |
 
-Con `GROUP BY` el cálculo se hace por grupos: las filas que comparten el valor de la columna indicada forman un grupo y cada grupo da una fila del resultado. En el `SELECT` solo pueden ir las columnas del `GROUP BY` y funciones de agregación. Si hace falta filtrar grupos (por ejemplo, máquinas con más de dos fallas) se usa `HAVING`, porque `WHERE` filtra filas antes de agrupar.
+Con `GROUP BY` el cálculo se hace por grupos: las filas que comparten el valor de la columna indicada forman un grupo y cada grupo da una fila del resultado. En el `SELECT` solo deberían ir las columnas del `GROUP BY` y funciones de agregación, como exige el SQL estándar. SQLite acepta otras columnas sin dar error, pero devuelve el valor de una fila cualquiera del grupo, así que el resultado no es confiable. Si hace falta filtrar grupos (por ejemplo, máquinas con más de dos fallas) se usa `HAVING`, porque `WHERE` filtra filas antes de agrupar.
 
 Las funciones de agregación **ignoran los `NULL`**, salvo `COUNT(*)`, que cuenta filas. Esto importa en las horas-hombre: las órdenes pendientes todavía no tienen horas cargadas, cuentan como órdenes pero no entran en la suma ni en el promedio.
 
 ### Procedimiento
 
-Se siguió el mismo procedimiento que en el Paso 7: cada consulta se ejecutó sola en la pestaña **Ejecutar SQL** y se revisó la grilla de resultados.
+Se siguió el mismo procedimiento que en el Paso 7: cada consulta se ejecutó sola en la pestaña **Ejecutar SQL** y se revisó la grilla de resultados. En las capturas se ensancharon las columnas de texto para que se lean completas.
 
 ### Consulta 8.1 — Fallas por máquina (activo más crítico)
 
@@ -140,7 +140,7 @@ GROUP BY id_maquina
 ORDER BY cantidad_fallas DESC, horas_parada_total DESC;
 ```
 
-<!-- CAPTURA paso8_01: Ejecutar SQL con la consulta 8.1 y su resultado (6 filas) -->
+![Consulta 8.1 en Ejecutar SQL: fallas y horas de parada por máquina](./assets/paso8_01.png)
 
 **Resultado:** la máquina 1, el torno CNC, es el activo más crítico: 3 fallas y 10,5 horas de parada, todas mecánicas en el husillo. Le siguen la prensa hidráulica (máquina 5) y el robot de soldadura (máquina 4), con 2 fallas cada uno; la prensa queda primero por tener más horas de parada (6 contra 5). El resultado muestra el identificador de la máquina: en el Paso 9 se resuelve el nombre con un `JOIN`.
 
@@ -163,9 +163,9 @@ GROUP BY tipo
 ORDER BY horas_hombre_total DESC;
 ```
 
-<!-- CAPTURA paso8_02: Ejecutar SQL con la consulta 8.2 y su resultado (2 filas) -->
+![Consulta 8.2 en Ejecutar SQL: órdenes y horas-hombre por tipo de mantenimiento](./assets/paso8_02.png)
 
-**Resultado:** el correctivo concentra 8 órdenes y 23,25 horas-hombre, el 77,5 % de las 30 horas registradas; el preventivo, 5 órdenes y 6,75 horas. El promedio por orden correctiva (3,32 h) duplica al de la preventiva (1,69 h). Los promedios se calculan sobre las órdenes con horas cargadas: 7 de las 8 correctivas y 4 de las 5 preventivas, porque las dos pendientes tienen `horas_hombre` en `NULL`.
+**Resultado:** el correctivo concentra 8 órdenes y 23,25 horas-hombre, el 77,5 % de las 30 horas registradas; el preventivo, 5 órdenes y 6,75 horas. El promedio por orden correctiva (3,32 h) es casi el doble del de la preventiva (1,69 h). Los promedios se calculan sobre las órdenes con horas cargadas: 7 de las 8 correctivas y 4 de las 5 preventivas, porque las dos pendientes tienen `horas_hombre` en `NULL`.
 
 ## Paso 9 — Consultas de integración de tablas (JOINs)
 
@@ -176,7 +176,7 @@ En un modelo normalizado cada dato está en una sola tabla y las demás lo refer
 - `INNER JOIN` devuelve solo las filas que tienen pareja en las dos tablas.
 - `LEFT JOIN` devuelve todas las filas de la tabla de la izquierda; si no tienen pareja, las columnas de la derecha quedan en `NULL`.
 
-Los **alias** de tabla (`ordenes_trabajo AS ot`) acortan el código e indican de qué tabla sale cada columna cuando dos tablas tienen columnas con el mismo nombre, como `id_maquina`. El operador `||` concatena texto y `COALESCE(a, b)` devuelve el primer valor que no sea `NULL`.
+Los **alias** de tabla (`ordenes_trabajo AS ot`) acortan el código e indican de qué tabla sale cada columna cuando dos tablas tienen columnas con el mismo nombre, como `id_maquina`. El operador `||` concatena texto; si alguno de sus operandos es `NULL`, el resultado completo es `NULL`. `COALESCE(a, b)` devuelve el primer valor que no sea `NULL`.
 
 ### Procedimiento
 
@@ -209,7 +209,7 @@ LEFT JOIN planes_preventivos AS p  ON p.id_plan = ot.id_plan
 ORDER BY ot.nro_ot, f.fecha_hora;
 ```
 
-<!-- CAPTURA paso9_01: Ejecutar SQL con la consulta 9.1 y su resultado (14 filas) -->
+![Consulta 9.1 en Ejecutar SQL: 14 filas con máquina, motivo y técnico de cada orden](./assets/paso9_01.png)
 
 **Resultado:** 14 filas para las 13 órdenes, porque la OT-2026-0107 atiende dos fallas de la prensa hidráulica (pérdida de presión y fuga en el sello) y aparece una vez por cada una. La falla pendiente de la inyectora no figura porque todavía no tiene orden: la consulta parte de las órdenes.
 
@@ -235,6 +235,6 @@ INNER JOIN repuestos AS r        ON r.id_repuesto = otr.id_repuesto
 ORDER BY ot.nro_ot, r.descripcion;
 ```
 
-<!-- CAPTURA paso9_02: Ejecutar SQL con la consulta 9.2 y su resultado (6 filas) -->
+![Consulta 9.2 en Ejecutar SQL: repuestos consumidos por orden, con máquina y costo](./assets/paso9_02.png)
 
 **Resultado:** seis consumos por un total de $ 2.396.100. La placa SMB del robot de soldadura ($ 1.850.000) explica el 77 % del gasto, y su stock quedó en cero (consulta 7.2): conviene reponerla antes de una nueva falla del robot.
