@@ -25,7 +25,7 @@ Trabajo Práctico Nº 3 de **Informática Industrial** (UTN — Facultad Regiona
 | III — Construcción | 5. `CREATE TABLE` · 6. `INSERT INTO` | ✅ | ✅ (11) |
 | IV — Consulta | 7. Filtrado · 8. Agrupaciones · 9. `JOIN` | ✅ | ✅ (7) |
 
-Los dos entregables están completos y verificados: el informe tiene 46 páginas, con las 22 capturas, y el `.sql` contiene creación, carga y consultas. El control final contra el enunciado está en [`a_requisitos/criterios-aceptacion.md`](a_requisitos/criterios-aceptacion.md).
+Los dos entregables están completos y verificados: el informe tiene 48 páginas, con introducción y las 22 capturas, y el `.sql` contiene creación, carga y consultas. El control final contra el enunciado está en [`a_requisitos/criterios-aceptacion.md`](a_requisitos/criterios-aceptacion.md).
 
 Pendiente del grupo:
 
@@ -51,7 +51,7 @@ maquinas ──< planes_preventivos ──<  ordenes_trabajo >── tecnicos
 
 | Carpeta | Contenido |
 |---|---|
-| [`a_requisitos/`](a_requisitos/) | Enunciado, requisitos de cada fase, criterios de aceptación y diseño de la portada. |
+| [`a_requisitos/`](a_requisitos/) | Enunciado, caso de estudio (la planta), requisitos de cada fase, criterios de aceptación y diseño de la portada. |
 | [`b_investigacion/`](b_investigacion/) | Fichas de investigación y fuentes (Pasos 1 y 2, y relevamiento de gestores de mantenimiento reales). |
 | [`c_prototipado/`](c_prototipado/) | Fuentes del informe y de la base: partes en Markdown, scripts SQL, capturas, base de trabajo y bitácora. |
 | [`d_presentacion/`](d_presentacion/) | Los dos entregables. |
@@ -60,7 +60,7 @@ Dentro de `c_prototipado/`:
 
 | Archivo | Para qué |
 |---|---|
-| `fase1-investigacion.md` … `fase4-explotacion.md`, `referencias.md` | Partes del informe, en el orden que fija `diseño.md`. |
+| `introduccion.md`, `fase1-investigacion.md` … `fase4-explotacion.md`, `referencias.md` | Partes del informe, en el orden que fija `diseño.md`. |
 | `diseño.md` | Configuración del PDF (partes, portada, índice). |
 | `sql/paso5-ddl.sql` | Creación de las 7 tablas y los 4 *triggers*. |
 | `sql/paso6-dml.sql` | Carga de datos simulados de planta (53 registros). |

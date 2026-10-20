@@ -8,6 +8,7 @@ base: diseno-utn
 pie: TP Nº 3 — Base de Datos GMAO
 salida: tp3-gmao-informe.pdf
 fuentes:
+  - introduccion.md
   - fase1-investigacion.md
   - fase2-planificacion.md
   - fase3-construccion.md

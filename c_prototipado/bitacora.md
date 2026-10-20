@@ -103,3 +103,9 @@ Registro del desarrollo: cada parte cerrada, las decisiones tomadas con el grupo
 - PDF regenerado: 46 páginas, 24 figuras, 18 tablas y ningún aviso. Se revisaron todas las páginas. Fuentes Type0, ninguna Type 3; 21 enlaces activos.
 - Check-list de `a_requisitos/criterios-aceptacion.md` completo, salvo la entrega.
 - Pendiente del grupo: revisión de la redacción del Paso 1 y la entrega antes del 28/10/2026 a las 23:59.
+
+## 2026-10-19 — Caso de estudio e introducción
+
+- `a_requisitos/escenario-planta.md`: se define el caso de estudio a partir de los datos ya cargados en la base. Es **Autopartes G4 S.A.**, una metalmecánica ficticia de Córdoba proveedora de autopartes. El documento describe su proceso (estampado, soldadura, mecanizado CNC e inyección, con aire comprimido como servicio), la criticidad de cada activo, el área de mantenimiento, los planes vigentes, qué consulta responde a cada rol, el alcance y los supuestos de los datos.
+- `introduccion.md`: contexto, objetivo, caso de estudio con diagrama del proceso, alcance y organización del informe. Va antes de la Fase I.
+- PDF regenerado: 48 páginas, 25 figuras, 18 tablas y ningún aviso. Fuentes Type0 y 21 enlaces activos.

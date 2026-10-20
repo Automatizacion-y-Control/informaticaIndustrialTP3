@@ -34,7 +34,7 @@ Además:
 
 ## Control final (2026-10-19)
 
-- Informe: 46 páginas, Pasos 1 a 9 en el orden del enunciado, 24 figuras (22 capturas de DB Browser, el diagrama ISA-95 y el DER) y 18 tablas, numeradas sin saltos. Sin marcas de captura pendientes.
+- Informe: 48 páginas, introducción con el caso de estudio y Pasos 1 a 9 en el orden del enunciado, 25 figuras (22 capturas de DB Browser, el proceso productivo, el diagrama ISA-95 y el DER) y 18 tablas, numeradas sin saltos. Sin marcas de captura pendientes.
 - Fuentes del PDF: todas Type0, ninguna Type 3. Enlaces externos activos: 21.
 - `verificar.py`: scripts ejecutados sobre una base vacía sin errores, 5 o más registros por tabla, 15 casos inválidos rechazados, las 7 consultas con resultado (5, 4, 2, 6, 2, 14 y 6 filas), SQL del informe idéntico al de los scripts y `tp3-gmao.sql` al día.
 - Pendiente del grupo: revisión de la redacción del Paso 1 («con sus propias palabras») y la entrega.
