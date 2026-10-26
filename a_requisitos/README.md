@@ -1,8 +1,8 @@
 # Requisitos — TP Nº 3: Base de Datos relacional para GMAO
 
-Requisitos del Trabajo Práctico Nº 3 de Informática Industrial, tomados del enunciado [`TRABAJO PRACTICO NRO 3 - BASE DE DATOS.pdf`](../TRABAJO%20PRACTICO%20NRO%203%20-%20BASE%20DE%20DATOS.pdf) y de las decisiones acordadas. Lo marcado como **[A CONFIRMAR]** en los archivos es una propuesta pendiente de aprobación.
+Requisitos del Trabajo Práctico Nº 3 de Informática Industrial, tomados del enunciado [`TRABAJO PRACTICO NRO 3 - BASE DE DATOS.pdf`](TRABAJO%20PRACTICO%20NRO%203%20-%20BASE%20DE%20DATOS.pdf) y de las decisiones acordadas. Lo marcado como **[A CONFIRMAR]** en los archivos es una propuesta pendiente de aprobación.
 
-Última actualización: 2026-10-19.
+Última actualización: 2026-10-26.
 
 ## Datos del trabajo
 

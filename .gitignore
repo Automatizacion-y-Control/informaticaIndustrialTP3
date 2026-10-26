@@ -24,3 +24,22 @@ c_prototipado/sql/verificacion.db
 
 # DB Browser for SQLite: archivos de proyecto personales
 *.sqbpro
+
+# Entornos Python y configuración privada local
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Archivos intermedios de revisión y generación
+/tmp/
+*.log
+
+# SQLite: variantes de extensión de archivos auxiliares
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm

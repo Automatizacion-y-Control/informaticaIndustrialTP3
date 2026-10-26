@@ -13,7 +13,9 @@
 *.jpeg binary
 *.webp binary
 *.gif binary
-*.svg binary
+*.svg text eol=lf
 *.ttf binary
 *.otf binary
 *.db binary
+*.sqlite binary
+*.sqlite3 binary

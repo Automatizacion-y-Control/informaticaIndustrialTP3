@@ -34,6 +34,16 @@ Pendiente del grupo:
 
 El detalle de cada avance y de cada decisión está en la [bitácora](c_prototipado/bitacora.md).
 
+## Verificación de la entrega (26/10/2026)
+
+- El script entregable se ejecutó completo sobre una base vacía: integridad correcta y sin referencias rotas.
+- Las 7 tablas suman 53 registros, con al menos 5 por tabla. Los datos de `gmao.db` coinciden con el script entregable.
+- El verificador rechazó los 15 casos inválidos y comprobó las 7 consultas (5, 4, 2, 6, 2, 14 y 6 filas), la coincidencia del SQL con las fuentes del informe y el entregable actualizado.
+- La prueba del modelo pasó 11 casos válidos y rechazó 9 inválidos.
+- El PDF tiene 48 páginas y los Pasos 1 a 9, sin marcadores de contenido pendiente. Se revisó visualmente una muestra de portada, índice, introducción, tablas, código y referencias.
+
+La revisión de autoría del Paso 1 y la entrega académica siguen a cargo del grupo.
+
 ## El modelo
 
 Siete tablas en tercera forma normal. Como en los gestores de mantenimiento reales (SAP PM, Odoo, Maximo), el **correctivo** nace de una falla y el **preventivo**, de un plan. Los dos terminan en una orden de trabajo:
@@ -82,13 +92,13 @@ Dentro de `c_prototipado/`:
 
 ## Scripts auxiliares
 
-Todos se ejecutan desde `c_prototipado/` o `c_prototipado/sql/`.
+Los comandos de la tabla se ejecutan desde `c_prototipado/`. Desde la raíz del repositorio, la verificación se ejecuta con `python c_prototipado/sql/verificar.py`.
 
 | Comando | Qué hace | ¿Modifica archivos? |
 |---|---|---|
 | `python sql/verificar.py` | Ejecuta los scripts sobre una base vacía en una carpeta temporal y comprueba varias cosas: registros por tabla, 15 casos inválidos rechazados, consultas con resultado, SQL del informe idéntico al de los scripts y si el `.sql` entregable está al día. | No. Trabaja sobre copias y borra la carpeta temporal |
 | `python sql/verificar.py --armar` | Lo anterior y, además, actualiza `d_presentacion/tp3-gmao.sql`. | Sí, el `.sql` entregable |
-| `python sql/armar-fase3.py` / `armar-fase4.py` | Regenera `fase3-construccion.md` / `fase4-explotacion.md` con el SQL de los scripts. La redacción de esas fases se edita en estos scripts. | Sí, el `.md` de la fase |
+| `python sql/armar-fase3.py` / `python sql/armar-fase4.py` | Regenera `fase3-construccion.md` / `fase4-explotacion.md` con el SQL de los scripts. La redacción de esas fases se edita en estos scripts. | Sí, el `.md` de la fase |
 | `python generar-der.py assets/fase2-planificacion_01.svg` | Regenera el diagrama entidad-relación. | Sí, el `.svg` |
 | `python prueba-modelo.py` | Prueba del modelo de la Fase II, en memoria. | No |
 
@@ -102,3 +112,25 @@ El PDF se arma a partir de `c_prototipado/` con la skill `documento-pdf` de Clau
 - Las capturas se toman en DB Browser, con la interfaz en español, y se guardan en `c_prototipado/assets/` con el nombre `pasoN_NN.png`.
 - Tablas y columnas en `snake_case`, sin tildes. Redacción del informe en forma impersonal.
 - Cada cambio relevante se anota en la [bitácora](c_prototipado/bitacora.md).
+
+## Implementación básica
+
+El grupo cuenta con una implementación básica complementaria en [gmao.24hs.click](https://gmao.24hs.click/). Los entregables académicos son el PDF y el script SQL de `d_presentacion/`.
+
+## Repositorio y publicación
+
+Remoto: [Automatizacion-y-Control/informaticaIndustrialTP3](https://github.com/Automatizacion-y-Control/informaticaIndustrialTP3).
+
+El historial local está en la rama `main`. Se versionan el PDF, el SQL, la base de trabajo, las fuentes y las capturas; los archivos locales y temporales quedan excluidos mediante `.gitignore`.
+
+Para verificar y subir los commits al remoto, desde la raíz del proyecto:
+
+```powershell
+python c_prototipado/sql/verificar.py
+git diff --check
+git status
+git remote -v
+git push -u origin main
+```
+
+Subir el repositorio a GitHub no reemplaza la entrega académica: los archivos a presentar son los dos de `d_presentacion/`.

@@ -109,3 +109,22 @@ Registro del desarrollo: cada parte cerrada, las decisiones tomadas con el grupo
 - `a_requisitos/escenario-planta.md`: se define el caso de estudio a partir de los datos ya cargados en la base. Es **Autopartes G4 S.A.**, una metalmecánica ficticia de Córdoba proveedora de autopartes. El documento describe su proceso (estampado, soldadura, mecanizado CNC e inyección, con aire comprimido como servicio), la criticidad de cada activo, el área de mantenimiento, los planes vigentes, qué consulta responde a cada rol, el alcance y los supuestos de los datos.
 - `introduccion.md`: contexto, objetivo, caso de estudio con diagrama del proceso, alcance y organización del informe. Va antes de la Fase I.
 - PDF regenerado: 48 páginas, 25 figuras, 18 tablas y ningún aviso. Fuentes Type0 y 21 enlaces activos.
+
+
+## 2026-10-26 — Verificación de entrega y preparación para GitHub
+
+- Verificación ejecutada sin modificar los entregables: 7 tablas, 53 registros, 15 casos inválidos rechazados y 7 consultas con resultado. SQL del informe consistente y respaldo al día.
+- `prueba-modelo.py`: 11 casos válidos aceptados y 9 inválidos rechazados.
+- Script entregable ejecutado completo en memoria; integridad correcta. Base `gmao.db` abierta en modo de solo lectura: integridad correcta, sin referencias rotas y datos idénticos a los recreados desde el entregable.
+- PDF inspeccionado: 48 páginas, Pasos 1 a 9 presentes y sin marcadores pendientes. Revisión visual por muestreo de portada, índice, introducción, tablas, código y referencias.
+- README actualizado con resultados, comandos desde la raíz y procedimiento para conectar un remoto vacío de GitHub. Corregido el enlace al enunciado en `a_requisitos/README.md`.
+- `.gitignore`: entornos Python, configuración privada local, temporales y variantes de auxiliares SQLite. `.gitattributes`: SVG como texto y variantes SQLite como binarios.
+- Rama local `main`, sin remoto configurado. Pendientes: crear y conectar el remoto, subir el historial, revisión grupal del Paso 1 y entrega académica.
+
+
+## 2026-10-26 - Remoto e implementación complementaria
+
+- Remoto `origin`: `https://github.com/Automatizacion-y-Control/informaticaIndustrialTP3.git`.
+- README actualizado con el repositorio real y la implementación básica informada por el grupo: `https://gmao.24hs.click/`.
+- Revisión web pendiente: el lector web no pudo acceder, la conexión HTTPS desde la terminal falló y el navegador integrado no está disponible en esta sesión. No se verificaron interfaz ni funciones.
+- Commit solicitado en español, sin firma criptográfica ni línea de coautoría. Push pendiente.
