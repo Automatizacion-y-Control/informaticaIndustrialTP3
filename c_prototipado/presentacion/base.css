@@ -1,0 +1,114 @@
+/* Presentación TP Nº 3 — GMAO. Estructura común de las diapositivas (1280 × 720 px).
+   Colores y fuentes salen de las variables de cada tema (tema-*.css).
+   Se proyecta sobre pizarra: ningún texto que deba leerse baja de 15 px. */
+@page { size: 1280px 720px; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: var(--f-txt); color: var(--tinta); background: var(--papel);
+       -webkit-print-color-adjust: exact; print-color-adjust: exact;
+       font-feature-settings: "tnum" 1; }
+.mono { font-family: var(--f-mono); }
+
+.slide { width: 1280px; height: 720px; position: relative; overflow: hidden;
+         break-after: page; background: var(--papel); }
+.slide:last-child { break-after: auto; }
+
+/* ---------- Encabezado, título y pie de las diapositivas de contenido ---------- */
+.cab { position: absolute; left: 64px; right: 64px; top: 30px; display: flex; align-items: center;
+       font-size: 16px; letter-spacing: .06em; text-transform: uppercase; color: var(--acento);
+       font-weight: 600; }
+.cab .orador { margin-left: auto; text-transform: none; letter-spacing: 0; font-weight: 600;
+               color: var(--nota); }
+.titulo { position: absolute; left: 64px; right: 64px; top: 56px; margin: 0;
+          font-family: var(--f-tit); font-weight: var(--peso-tit); font-size: 42px;
+          letter-spacing: var(--track-tit); line-height: 1.1; color: var(--tinta); }
+.bajada { position: absolute; left: 64px; right: 64px; top: 112px; font-size: 21px;
+          color: var(--nota); }
+.cuerpo { position: absolute; left: 64px; right: 64px; top: 164px; bottom: 62px; }
+.pie { position: absolute; left: 64px; right: 64px; bottom: 18px; display: flex;
+       align-items: center; font-size: 15px; color: var(--nota); }
+.pie .fases { margin: 0 auto; display: flex; gap: 22px; }
+.pie .fases span { padding-bottom: 2px; border-bottom: 3px solid transparent; }
+.pie .fases span.on { color: var(--tinta); border-color: var(--acento); font-weight: 600; }
+
+/* ---------- Piezas ---------- */
+.panel { border-top: 3px solid var(--tinta); padding-top: 10px; }
+.rotulo { font-size: 16px; letter-spacing: .05em; text-transform: uppercase; color: var(--nota);
+          font-weight: 600; margin-bottom: 12px; }
+.cifra { white-space: nowrap; font-family: var(--f-tit); font-size: 68px; font-weight: var(--peso-tit);
+         letter-spacing: -.02em; line-height: 1; color: var(--tinta); }
+.cifra-txt { white-space: nowrap; font-size: 20px; color: var(--nota); line-height: 1.3; }
+.nota { font-size: 17px; color: var(--nota); margin-top: 8px; }
+.recorte { overflow: hidden; border: 1px solid var(--linea); position: relative; background: #fff; }
+.recorte img { position: absolute; display: block; }
+.epigrafe { font-size: 15px; color: var(--nota); margin-top: 6px; }
+
+/* Barras horizontales: una sola serie, el dato clave en el color de acento */
+.barras { display: grid; grid-template-columns: 230px 1fr; row-gap: 8px; column-gap: 16px;
+          align-items: center; font-size: 19px; }
+.barras .eti { text-align: right; line-height: 1.15; white-space: nowrap; }
+.barras .pista { display: flex; align-items: center; gap: 12px; }
+.barras .barra { height: 28px; background: var(--barra); border-radius: 0 3px 3px 0; }
+.barras .barra.clave { background: var(--acento); }
+.barras .val { font-size: 19px; color: var(--nota); white-space: nowrap; }
+.barras .val b { color: var(--tinta); }
+.apilada { display: flex; height: 38px; gap: 3px; }
+.apilada div { display: flex; align-items: center; padding-left: 12px; font-size: 17px; font-weight: 600; }
+
+/* ---------- Editor SQL de DB Browser for SQLite ----------
+   <pre class="editor" data-pestana="SQL 1" data-inicio="5">SQL plano</pre>; resaltar.js arma
+   la barra de botones, la pestaña, los números de línea y los colores del programa. */
+.editor { margin: 0; border: 1px solid #A9A9A9; background: #fff; font-family: var(--f-mono);
+          font-size: 16px; line-height: 1.45; color: #000; }
+.editor .ed-barra { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 10px;
+                    background: #F0F0F0; border-bottom: 1px solid #D9D9D9; }
+.editor .ed-barra svg { display: block; }
+.editor .ed-barra i { width: 1px; height: 18px; background: #C8C8C8; }
+.editor .ed-pestanas { display: flex; align-items: flex-end; height: 30px; background: #F0F0F0;
+                       border-bottom: 1px solid #A9A9A9; padding-left: 8px; font-family: Arial, sans-serif; }
+.editor .ed-pestana { background: #fff; border: 1px solid #A9A9A9; border-bottom: 0; padding: 4px 12px;
+                      font-size: 15px; color: #000; margin-bottom: -1px; display: flex; align-items: center; gap: 8px; }
+.editor .ed-pestana b { width: 9px; height: 9px; background: #D9534F; display: inline-block; }
+.editor .ed-codigo { display: grid; grid-template-columns: auto 1fr; }
+.editor .ed-num { background: #F0F0F0; color: #333; text-align: right; padding: 6px 10px 6px 12px;
+                  border-right: 1px solid #DDDDDD; }
+.editor .ed-txt { padding: 6px 14px; white-space: pre; overflow: hidden; }
+.editor .kw { color: #00007F; font-weight: 700; }
+.editor .id { color: #7F007F; }
+.editor .str { color: #C00000; }
+.editor .num { color: #007F7F; }
+.editor .com { color: #007F00; }
+
+/* ---------- Piezas de la presentación completa ---------- */
+.texto { font-size: 19px; line-height: 1.45; }
+.texto b { color: var(--tinta); }
+.lista { margin: 0; padding-left: 22px; font-size: 19px; line-height: 1.45; }
+.lista li { margin-bottom: 8px; }
+.lista li::marker { color: var(--acento); }
+.tabla { border-collapse: collapse; width: 100%; font-size: 19px; }
+.tabla th { text-align: left; font-family: var(--f-mono); font-size: 15px; font-weight: 500;
+            text-transform: uppercase; color: var(--nota); border-bottom: 2px solid var(--tinta);
+            padding: 6px 10px; }
+.tabla td { padding: 7px 10px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+.tabla td.mono, .tabla td code { font-family: var(--f-mono); font-size: 17px; }
+.tabla tr.clave td { background: rgba(14,107,99,.10); font-weight: 600; }
+.tabla th.clave { color: var(--acento); border-bottom-color: var(--acento); }
+.tile { background: #fff; border: 1px solid var(--linea); padding: 12px 16px; }
+.tile.on { border: 1.5px solid var(--acento); border-left-width: 6px; }
+.tile h3 { margin: 0 0 4px; font-size: 23px; font-weight: 600; }
+.tile p { margin: 0; font-size: 19px; color: var(--nota); line-height: 1.35; }
+.tile .n { font-family: var(--f-mono); color: var(--acento); font-size: 16px; margin-right: 6px; }
+.chip { display: inline-block; font-family: var(--f-mono); font-size: 16px; padding: 4px 10px;
+        border: 1px solid var(--linea); background: #fff; margin: 0 6px 8px 0; }
+.badge { display: inline-block; font-family: var(--f-mono); font-size: 15px; font-weight: 600;
+         padding: 2px 8px; background: var(--acento); color: #fff; }
+.badge.gris { background: var(--barra); color: var(--tinta); }
+.badge.claro { background: var(--codigo); color: var(--nota); border: 1px solid var(--linea); }
+.terminal { font-family: var(--f-mono); font-size: 15px; background: #1B1E22; color: #E8E8E3;
+            padding: 8px 12px; white-space: nowrap; }
+.terminal::before { content: "> "; color: #7FD1C7; }
+.grande { font-family: var(--f-tit); font-size: 44px; font-weight: 600; color: var(--tinta); line-height: 1; }
+.flujo text { font-family: var(--f-txt); fill: var(--tinta); }
+.flujo .m { font-family: var(--f-mono); fill: var(--nota); }
+.flujo .a { fill: var(--acento); }
+.tabla td.mono { white-space: nowrap; }

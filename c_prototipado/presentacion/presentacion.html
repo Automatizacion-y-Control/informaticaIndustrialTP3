@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Presentación TP Nº 3 — GMAO</title>
+<!-- Contenido tomado de d_presentacion/tp3-gmao-informe.pdf; las figuras citan su número en el informe. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=block">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="tema-b-ingenieria.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+  .col { display: flex; flex-direction: column; gap: 14px; }
+  .fig { font-family: var(--f-mono); font-size: 16px; color: var(--acento); }
+  .fig::before { content: "Informe · "; color: var(--nota); }
+  .res { background: #fff; border: 1.5px solid var(--acento); border-left-width: 6px; padding: 12px 16px; }
+  .res h3 { margin: 0 0 6px; font-family: var(--f-mono); font-size: 15px; font-weight: 600; color: var(--acento); text-transform: uppercase; }
+  .res p { margin: 0; font-size: 19px; line-height: 1.4; }
+  .isa div { display: grid; grid-template-columns: 1fr; border: 1px solid var(--linea); background: #fff; margin-bottom: 26px; padding: 8px 12px; text-align: center; position: relative; }
+  .isa div:not(:last-child)::after { content: "↕"; position: absolute; left: 50%; bottom: -26px; transform: translateX(-50%); color: var(--nota); font-size: 18px; line-height: 26px; }
+  .isa div b { font-size: 18px; font-weight: 600; }
+  .isa div small { font-size: 16px; color: var(--nota); }
+  .isa div.on { border: 1.5px solid var(--acento); background: rgba(14,107,99,.07); }
+  .pasos-lista { margin: 0; padding-left: 24px; font-size: 18px; line-height: 1.4; }
+  .pasos-lista li { margin-bottom: 4px; }
+  .control td, .control th { padding: 5px 10px; }
+  .control td.ok { color: var(--acento); font-weight: 600; font-family: var(--f-mono); }
+  #qr { width: fit-content; }
+  #qr svg { display: block; width: 220px; height: 220px; }
+  .final h1 { position: absolute; left: 80px; top: 230px; margin: 0; font-size: 84px; font-weight: 600; letter-spacing: -0.02em; }
+</style>
+</head>
+<body>
+
+<!-- 1 ============ PORTADA ============ -->
+<section class="slide portada">
+  <svg class="p-esquema" width="520" height="560" viewBox="0 0 520 560" fill="none" stroke-width="1.5">
+    <g class="trazo">
+      <rect x="20" y="20" width="150" height="100" rx="3"/><path d="M20 46 H170"/>
+      <rect x="340" y="20" width="150" height="100" rx="3"/><path d="M340 46 H490"/>
+      <rect x="20" y="230" width="150" height="110" rx="3"/><path d="M20 256 H170"/>
+      <rect x="340" y="220" width="150" height="140" rx="3"/><path d="M340 246 H490"/>
+      <rect x="20" y="440" width="150" height="100" rx="3"/><path d="M20 466 H170"/>
+      <rect x="340" y="440" width="150" height="100" rx="3"/><path d="M340 466 H490"/>
+      <rect x="200" y="140" width="110" height="64" rx="3"/><path d="M200 166 H310"/>
+      <path d="M95 120 V230 M170 70 H340 M415 120 V220 M170 290 H340 M415 360 V440 M95 340 V440 M170 490 H340 M255 140 V70"/>
+    </g>
+  </svg>
+  <div class="p-inst"><b>Universidad Tecnológica Nacional</b> · Facultad Regional Córdoba<br>Licenciatura en Automatización y Control — Informática Industrial</div>
+  <div class="p-kicker">Trabajo Práctico Nº 3 · Grupo Nº 4</div>
+  <h1 class="p-titulo">Diseño, implementación y consulta de una base de datos relacional para la Gestión de Mantenimiento Industrial (GMAO)</h1>
+  <div class="p-pie">
+    <div><span>Docente</span>Ing. Carolina Rivarola</div>
+    <div><span>Presentan</span>Emiliano Casali · Gustavo Del Soto · Facundo Ferrero · Gonzalo Vera</div>
+    <div><span>Fecha</span>Córdoba, octubre de 2026</div>
+  </div>
+</section>
+
+<!-- 2 ============ CONSIGNA Y ESTRUCTURA ============ -->
+<section class="slide">
+  <div class="cab">Introducción · Objetivo<span class="orador">Emiliano Casali</span></div>
+  <h2 class="titulo">Investigar, diseñar, implementar y consultar</h2>
+  <div class="bajada">Una base de datos relacional orientada al ámbito industrial, con SQL y en forma secuencial.</div>
+  <div class="cuerpo" style="display:grid;grid-template-columns:400px 1fr;gap:36px">
+    <div class="col">
+      <div class="tile"><h3>Escenario: GMAO</h3><p>Activos, historial de fallas, órdenes de trabajo correctivas y preventivas, técnicos asignados y repuestos utilizados.</p></div>
+      <div class="tile"><h3>Motor y herramienta</h3><p>SQLite con DB Browser for SQLite.</p></div>
+      <div class="tile"><h3>Entregables</h3><p>Informe técnico (PDF) y script <span class="mono">tp3-gmao.sql</span>.</p></div>
+    </div>
+    <div class="col" style="gap:10px">
+      <div class="tile"><h3><span class="n">I</span>La Investigación</h3><p>Paso 1 · Conceptos de BD · Paso 2 · Entorno RDBMS — <b>Emiliano</b></p></div>
+      <div class="tile"><h3><span class="n">II</span>La Planificación</h3><p>Paso 3 · Entidades y datos · Paso 4 · Diagrama DER — <b>Gustavo</b></p></div>
+      <div class="tile"><h3><span class="n">III</span>La Construcción</h3><p>Paso 5 · Tablas en SQL · Paso 6 · Carga de datos — <b>Facundo</b></p></div>
+      <div class="tile"><h3><span class="n">IV</span>La Consulta</h3><p>Paso 7 · Consultas básicas — <b>Facundo</b> · Pasos 8 y 9 · Agrupaciones y Joins — <b>Gonzalo</b></p></div>
+    </div>
+  </div>
+  <div class="pie" data-fase=""></div>
+</section>
+
+<!-- 3 ============ CASO DE ESTUDIO ============ -->
+<section class="slide">
+  <div class="cab">Introducción · Caso de estudio<span class="orador">Emiliano Casali</span></div>
+  <h2 class="titulo">Autopartes G4 S.A.: cuatro líneas y un servicio común</h2>
+  <div class="bajada">Metalmecánica ficticia de Córdoba, tres turnos. Registros simulados; marcas y modelos reales.</div>
+  <div class="cuerpo" style="display:grid;grid-template-columns:620px 1fr;gap:34px">
+    <div>
+      <svg class="flujo" width="620" height="330" viewBox="0 0 620 330">
+        <defs><marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#1B1E22"/></marker></defs>
+        <g fill="#fff" stroke="#1B1E22" stroke-width="1.5">
+          <rect x="0" y="133" width="150" height="64"/>
+          <rect x="200" y="10" width="160" height="64"/><rect x="200" y="133" width="160" height="64"/><rect x="200" y="256" width="160" height="64"/>
+          <rect x="400" y="10" width="110" height="64"/>
+          <rect x="470" y="133" width="150" height="64" stroke="#0E6B63" stroke-width="2.5"/>
+        </g>
+        <g stroke="#1B1E22" stroke-width="1.5" fill="none" marker-end="url(#fl)">
+          <path d="M360 42 H398"/><path d="M455 74 V131"/><path d="M360 165 H468"/><path d="M360 288 H545 V199"/>
+        </g>
+        <g stroke="#5E656E" stroke-width="1.5" fill="none" stroke-dasharray="5 4" marker-end="url(#fl)">
+          <path d="M75 133 V42 H198"/><path d="M150 165 H198"/><path d="M75 197 V288 H198"/>
+        </g>
+        <text x="75" y="160" font-size="17" font-weight="600" text-anchor="middle">Aire comprimido</text><text class="m" x="75" y="183" font-size="15" text-anchor="middle">CMP-01</text>
+        <text x="280" y="37" font-size="17" font-weight="600" text-anchor="middle">Estampado</text><text class="m" x="280" y="60" font-size="15" text-anchor="middle">PRE-01</text>
+        <text x="280" y="160" font-size="17" font-weight="600" text-anchor="middle">Mecanizado CNC</text><text class="m" x="280" y="183" font-size="15" text-anchor="middle">TOR-01 · FRE-01</text>
+        <text x="280" y="283" font-size="17" font-weight="600" text-anchor="middle">Inyección</text><text class="m" x="280" y="306" font-size="15" text-anchor="middle">INY-01</text>
+        <text x="455" y="37" font-size="17" font-weight="600" text-anchor="middle">Soldadura</text><text class="m" x="455" y="60" font-size="15" text-anchor="middle">ROB-01</text>
+        <text x="545" y="160" font-size="17" font-weight="600" text-anchor="middle">Control</text><text x="545" y="182" font-size="17" font-weight="600" text-anchor="middle">y despacho</text>
+      </svg>
+      <div class="fig" style="margin-top:6px">Figura 1. Proceso productivo y máquinas bajo mantenimiento</div>
+      <p class="texto" style="margin:12px 0 0">Seis máquinas, <b>cinco técnicos</b> de distintas especialidades y un <b>pañol</b> de repuestos. Las fallas generan órdenes correctivas; los planes preventivos, por calendario o por horas de uso, generan las preventivas.</p>
+    </div>
+    <table class="tabla" style="font-size:17px">
+      <tr><th>Código</th><th>Máquina</th><th>Criticidad</th></tr>
+      <tr><td class="mono">TOR-01</td><td>Torno CNC · Haas ST-20</td><td>ALTA</td></tr>
+      <tr><td class="mono">FRE-01</td><td>Centro de mecanizado vertical · Haas VF-2</td><td>ALTA</td></tr>
+      <tr><td class="mono">ROB-01</td><td>Robot de soldadura · ABB IRB 2600</td><td>ALTA</td></tr>
+      <tr><td class="mono">PRE-01</td><td>Prensa hidráulica · Schuler PH 250</td><td>MEDIA</td></tr>
+      <tr><td class="mono">CMP-01</td><td>Compresor de tornillo · Atlas Copco GA 37</td><td>MEDIA</td></tr>
+      <tr><td class="mono">INY-01</td><td>Inyectora de plástico · Engel e-mac 180</td><td>BAJA</td></tr>
+    </table>
+  </div>
+  <div class="pie" data-fase=""></div>
+</section>
+
+<!-- 4 ============ APERTURA FASE I ============ -->
+<section class="slide apertura">
+  <div class="a-izq">
+    <div class="a-kicker">Fase I</div>
+    <h1 class="a-titulo">La Investigación</h1>
+    <div class="a-desc">Fundamentos y clasificación</div>
+    <div class="a-orador">Presenta<b>Emiliano Casali</b></div>
+  </div>
+  <ol class="a-indice">
+    <li class="on"><span>I</span><div><b>La Investigación</b><small>Paso 1 · Conceptos de BD · Paso 2 · Entorno RDBMS</small></div></li>
+    <li><span>II</span><div><b>La Planificación</b><small>Paso 3 · Entidades y datos · Paso 4 · Diagrama DER</small></div></li>
+    <li><span>III</span><div><b>La Construcción</b><small>Paso 5 · Tablas en SQL · Paso 6 · Carga de datos</small></div></li>
+    <li><span>IV</span><div><b>La Consulta</b><small>Pasos 7, 8 y 9 · Consultas, agrupaciones y joins</small></div></li>
+  </ol>
+  <div class="pie a-pie"></div>
+</section>
+
+<!-- 5 ============ PASO 1: QUÉ ES Y CLASIFICACIÓN ============ -->
+<section class="slide">
+  <div class="cab">Fase I · Paso 1 — Definición y usos industriales<span class="orador">Emiliano Casali</span></div>
+  <h2 class="titulo">Qué es una base de datos y cómo se clasifican</h2>
+  <div class="bajada">La estructura y las reglas de los datos son parte de la base, no del cuidado de quien carga.</div>
+  <div class="cuerpo" style="display:grid;grid-template-columns:400px 1fr;gap:34px">
+    <div class="col">
+      <div class="tile"><h3>Modelo relacional (Codd, 1970)</h3><p>Tablas vinculadas por claves: la <b>PK</b> identifica cada fila y la <b>FK</b> crea el vínculo. Se usa el lenguaje SQL.</p></div>
+      <div class="tile"><h3>Transacciones ACID</h3><p><b>A</b>tomicidad · <b>C</b>onsistencia · a<b>I</b>slamiento · <b>D</b>urabilidad: los datos quedan correctos aunque haya errores o cortes.</p></div>
+    </div>
+    <div>
+      <table class="tabla" style="font-size:17px">
+        <tr><th></th><th class="clave">Relacional</th><th>NoSQL</th><th>Series temporales</th></tr>
+        <tr><td><b>Modelo</b></td><td>Tablas vinculadas por claves</td><td>Documentos, clave-valor, columnas o grafos</td><td>Mediciones con marca de tiempo</td></tr>
+        <tr><td><b>Esquema</b></td><td>Fijo, definido de antemano</td><td>Flexible o sin esquema</td><td>Flexible, centrado en el tiempo</td></tr>
+        <tr><td><b>Consistencia</b></td><td>Fuerte (ACID)</td><td>Variable según el motor</td><td>Orientada a la escritura masiva</td></tr>
+        <tr><td><b>Uso en planta</b></td><td>ERP, MES, GMAO, recetas, calidad</td><td>Configuraciones, eventos</td><td>Sensores, historiador SCADA</td></tr>
+      </table>
+      <div class="fig" style="margin-top:6px">Tabla 1. Clasificación de las bases de datos</div>
+      <p class="texto" style="margin-top:12px"><b>En una fábrica no compiten: se complementan.</b></p>
+    </div>
+  </div>
+  <div class="pie" data-fase="I"></div>
+</section>
+
+<!-- 6 ============ PASO 1: USOS ============ -->
+<section class="slide">
+  <div class="cab">Fase I · Paso 1 — Definición y usos industriales<span class="orador">Emiliano Casali</span></div>
+  <h2 class="titulo">Tres usos críticos de las bases relacionales en la fábrica</h2>
+  <div class="bajada">Los niveles 3 y 4 de ISA-95, donde se gestionan órdenes, equipos, materiales y personas.</div>
+  <div class="cuerpo" style="display:grid;grid-template-columns:470px 1fr;gap:36px">
+    <div>
+      <div class="isa">
+        <div class="on"><b>Nivel 4 — Planificación y logística: ERP</b><small>Base relacional</small></div>
+        <div class="on"><b>Nivel 3 — Operaciones: MES, GMAO</b><small>Base relacional + historiador</small></div>
+        <div><b>Nivel 2 — Supervisión y control: SCADA, PLC</b><small>Historiador (series temporales)</small></div>
+        <div><b>Niveles 1 y 0 — Sensores, actuadores y proceso</b></div>
+      </div>
+      <div class="fig" style="margin-top:-14px">Figura 2. Niveles del modelo ISA-95</div>
+    </div>
+    <div class="col">
+      <div class="tile"><h3><span class="n">1</span>Integración ERP–MES</h3><p>Órdenes que bajan del ERP; producción y consumos que suben del MES. La integridad referencial y ACID evitan datos huérfanos o a medias.</p></div>
+      <div class="tile"><h3><span class="n">2</span>Recetas de proceso (ISA-88)</h3><p>Versiones y aprobación de la receta, y qué versión se usó en cada lote: trazabilidad.</p></div>
+      <div class="tile on"><h3><span class="n">3</span>Gestión del mantenimiento (GMAO)</h3><p>Activos, órdenes, planes preventivos y repuestos: el escenario elegido.</p></div>
+    </div>
+  </div>
+  <div class="pie" data-fase="I"></div>
+</section>
+
+<!-- 7 ============ PASO 2: SQLITE ============ -->
+<section class="slide">
+  <div class="cab">Fase I · Paso 2 — Selección del motor y requerimientos<span class="orador">Emiliano Casali</span></div>
+  <h2 class="titulo">El gestor elegido: SQLite</h2>
+  <div class="bajada">Sin servidor, en un solo archivo, con ACID, claves foráneas, CHECK y triggers.</div>
+  <div class="cuerpo" style="display:grid;grid-template-columns:430px 1fr;gap:34px">
+    <div class="col">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="tile"><h3>Sin servidor</h3><p>Biblioteca embebida.</p></div>
+        <div class="tile"><h3>Un solo archivo</h3><p>Fácil de copiar y entregar.</p></div>
+        <div class="tile"><h3>Integridad</h3><p>ACID, FK, CHECK, triggers.</p></div>
+        <div class="tile"><h3>Dominio público</h3><p>Liviano y multiplataforma.</p></div>
+      </div>
+      <div class="tile on"><h3>Sus límites</h3><p>Un solo escritor a la vez. Un GMAO multiusuario real correría sobre PostgreSQL, SQL Server o MySQL; el SQL usado es estándar.</p></div>
+    </div>
+    <div>
+      <table class="tabla" style="font-size:17px">
+        <tr><th>Criterio</th><th class="clave">SQLite</th><th>Cliente-servidor</th></tr>
+        <tr><td><b>Arquitectura</b></td><td>Biblioteca embebida, archivo local</td><td>Servicio en un servidor, acceso por red</td></tr>
+        <tr><td><b>Instalación</b></td><td>Nula: el motor viene en la herramienta</td><td>Servicio, usuarios y permisos</td></tr>
+        <tr><td><b>Escritura simultánea</b></td><td>Un escritor a la vez</td><td>Muchos escritores</td></tr>
+        <tr><td><b>Entrega del trabajo</b></td><td>Un archivo .db</td><td>Volcado de la base</td></tr>
+        <tr><td><b>Uso típico</b></td><td>Embebido, IoT, educación, prototipos</td><td>Sistemas de planta multiusuario</td></tr>
+      </table>
+      <div class="fig" style="margin-top:6px">Tabla 2. Elección del gestor: SQLite</div>
+    </div>
+  </div>
+  <div class="pie" data-fase="I"></div>
+</section>
+
+<!-- 8 ============ PASO 2: DB BROWSER ============ -->
+<section class="slide">
+  <div class="cab">Fase I · Paso 2 — Selección del motor y requerimientos<span class="orador">Emiliano Casali</span></div>
+  <h2 class="titulo">DB Browser for SQLite: instalación y acceso local</h2>
+  <div class="bajada">Interfaz gráfica de código abierto; trae el motor SQLite incluido.</div>
+  <div class="cuerpo" style="display:grid;grid-template-columns:1fr 560px;gap:26px">
+    <div class="col" style="gap:10px">
+      <table class="tabla" style="font-size:17px">
+        <tr><td><b>Sistema operativo</b></td><td>Windows 11 Pro, 64 bits</td></tr>
+        <tr><td><b>Equipo</b></td><td>AMD Ryzen 5 5500 · 16 GB RAM</td></tr>
+        <tr><td><b>DB Browser</b></td><td>3.13.1 · .msi 64 bits · 47 MB</td></tr>
+        <tr><td><b>Motor incluido</b></td><td>SQLite 3.46.1</td></tr>
+      </table>
+      <div class="terminal" style="font-size:15px">winget install --id DBBrowserForSQLite.DBBrowserForSQLite -e</div>
+      <ol class="pasos-lista">
+        <li><b>Nueva base de datos</b>: archivo <span class="mono">gmao.db</span></li>
+        <li><b>Preferencias</b>: claves foráneas activadas</li>
+        <li><b>Ejecutar SQL</b>: el script con <b>F5</b></li>
+        <li><b>Guardar cambios</b> con <b>Ctrl+S</b></li>
+        <li>Revisar <b>Estructura</b> y <b>Hoja de datos</b></li>
+      </ol>
+    </div>
+    <div class="col" style="gap:8px">
+      <div class="recorte" style="width:483px;height:128px"><img src="../assets/paso2_01.png" alt="Acerca de DB Browser" style="width:483px;left:0;top:0"></div>
+      <div class="fig">Figura 3. Acerca de: DB Browser 3.13.1 con SQLite 3.46.1</div>
+      <div class="recorte" style="width:560px;height:200px;margin-top:8px"><img src="../assets/paso2_04.png" alt="PRAGMA foreign_keys devuelve 1" style="width:1456px;left:0;top:-335px"></div>
+      <div class="fig">Figura 6. PRAGMA foreign_keys devuelve 1</div>
+    </div>
+  </div>
+  <div class="pie" data-fase="I"></div>
+</section>
+
+<!-- 9 ============ APERTURA FASE II ============ -->
+<section class="slide apertura">
+  <div class="a-izq">
+    <div class="a-kicker">Fase II</div>
+    <h1 class="a-titulo">La Planificación</h1>
+    <div class="a-desc">Diseño conceptual y modelado</div>
+    <div class="a-orador">Presenta<b>Gustavo Del Soto</b></div>
+  </div>
+  <ol class="a-indice">
+    <li><span>I</span><div><b>La Investigación</b><small>Paso 1 · Conceptos de BD · Paso 2 · Entorno RDBMS</small></div></li>
+    <li class="on"><span>II</span><div><b>La Planificación</b><small>Paso 3 · Entidades y datos · Paso 4 · Diagrama DER</small></div></li>
+    <li><span>III</span><div><b>La Construcción</b><small>Paso 5 · Tablas en SQL · Paso 6 · Carga de datos</small></div></li>
+    <li><span>IV</span><div><b>La Consulta</b><small>Pasos 7, 8 y 9 · Consultas, agrupaciones y joins</small></div></li>
+  </ol>
+  <div class="pie a-pie"></div>
+</section>
+
+<!-- 10 ============ PASO 3: ENTIDADES ============ -->
+<section class="slide">
+  <div class="cab">Fase II · Paso 3 — Identificación de entidades y atributos<span class="orador">Gustavo Del Soto</span></div>
+  <h2 class="titulo">Correctivo y preventivo terminan en la misma orden</h2>
+  <div class="bajada">Así lo resuelven SAP PM, Odoo Maintenance e IBM Maximo. De ese relevamiento salen las entidades.</div>
+  <div class="cuerpo">
+    <svg class="flujo" width="1152" height="300" viewBox="0 0 1152 300">
+      <defs><marker id="fe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#1B1E22"/></marker></defs>
+      <g fill="#fff" stroke="#1B1E22" stroke-width="1.5">
+        <rect x="0" y="110" width="170" height="80"/>
+        <rect x="270" y="10" width="290" height="84"/><rect x="270" y="206" width="290" height="84"/>
+        <rect x="620" y="100" width="260" height="100" stroke="#0E6B63" stroke-width="2.5" fill="#E6F0EE"/>
+        <rect x="940" y="30" width="212" height="84"/><rect x="940" y="186" width="212" height="84"/>
+      </g>
+      <g stroke="#1B1E22" stroke-width="1.5" fill="none" marker-end="url(#fe)">
+        <path d="M170 135 H220 V52 H268"/><path d="M170 165 H220 V248 H268"/>
+        <path d="M560 52 H590 V135 H618"/><path d="M560 248 H590 V165 H618"/>
+        <path d="M880 135 H910 V72 H938"/><path d="M880 165 H910 V228 H938"/>
+      </g>
+      <text x="85" y="157" font-size="22" font-weight="600" text-anchor="middle">Máquina</text>
+      <text class="a m" x="10" y="70" font-size="17">correctivo</text>
+      <text class="a m" x="10" y="240" font-size="17">preventivo</text>
+      <text x="286" y="46" font-size="21" font-weight="600">Falla</text><text class="m" x="286" y="76" font-size="16">fecha, descripción, parada</text>
+      <text x="286" y="242" font-size="21" font-weight="600">Plan preventivo</text><text class="m" x="286" y="272" font-size="16">tarea cada N días u horas</text>
+      <text x="750" y="145" font-size="22" font-weight="600" text-anchor="middle">Orden de trabajo</text>
+      <text class="m" x="750" y="174" font-size="16" text-anchor="middle">correctiva o preventiva</text>
+      <text x="956" y="66" font-size="21" font-weight="600">Técnico</text><text class="m" x="956" y="96" font-size="16">responsable</text>
+      <text x="956" y="222" font-size="21" font-weight="600">Repuestos</text><text class="m" x="956" y="252" font-size="16">del almacén</text>
+    </svg>
+    <div style="margin-top:22px;display:flex;align-items:center;gap:18px">
+      <span class="grande" style="font-size:40px">7 tablas</span>
+      <div><span class="chip">maquinas</span><span class="chip">fallas</span><span class="chip">planes_preventivos</span><span class="chip">ordenes_trabajo</span><br><span class="chip">tecnicos</span><span class="chip">repuestos</span><span class="chip">ot_repuestos</span></div>
+    </div>
+    <p class="texto" style="margin:6px 0 0;color:var(--nota)">Las 5 entidades del enunciado, los planes preventivos y la tabla intermedia ot_repuestos (relación N:M).</p>
+  </div>
+  <div class="pie" data-fase="II"></div>
+</section>
+
+<!-- 11 ============ PASO 3: TIPOS Y ESTRUCTURA ============ -->
+<section class="slide">
+  <div class="cab">Fase II · Paso 3 — Identificación de entidades y atributos<span class="orador">Gustavo Del Soto</span></div>
+  <h2 class="titulo">Atributos y tipos de datos de cada tabla</h2>
+  <div class="bajada">Una variable analógica guardada como texto no se puede promediar: el tipo de dato importa.</div>
+  <div class="cuerpo" style="display:grid;grid-template-columns:440px 1fr;gap:30px">
+    <div class="col" style="gap:8px">
+      <table class="tabla" style="font-size:17px">
+        <tr><th>Tipo</th><th>Afinidad</th><th>Uso en el modelo</th></tr>
+        <tr><td class="mono">INTEGER</td><td class="mono">INTEGER</td><td>Identificadores y cantidades</td></tr>
+        <tr><td class="mono">VARCHAR(n)</td><td class="mono">TEXT</td><td>Nombres, códigos, estados</td></tr>
+        <tr><td class="mono">FLOAT</td><td class="mono">REAL</td><td>Horas, horas-hombre, costos</td></tr>
+        <tr><td class="mono">DATE</td><td class="mono">NUMERIC</td><td>Fecha de instalación</td></tr>
+        <tr><td class="mono">DATETIME</td><td class="mono">NUMERIC</td><td>Fallas, emisión y cierre</td></tr>
+      </table>
+      <div class="fig">Tabla 4. Tipos de datos en SQLite</div>
+      <div class="tile" style="margin-top:6px"><p>Fechas en <b>ISO 8601</b> (<span class="mono">AAAA-MM-DD HH:MM:SS</span>): se ordenan como texto y se comparan con BETWEEN.</p></div>
+    </div>
+    <div>
+      <table class="tabla" style="font-size:17px">
+        <tr><th>Campo</th><th>Tipo</th><th>Restricciones</th></tr>
+        <tr><td class="mono">id_ot</td><td class="mono">INTEGER</td><td>PK</td></tr>
+        <tr><td class="mono">nro_ot</td><td class="mono">VARCHAR(15)</td><td>NOT NULL, UNIQUE</td></tr>
+        <tr><td class="mono">tipo</td><td class="mono">VARCHAR(12)</td><td>NOT NULL, CHECK (CORRECTIVA, PREVENTIVA)</td></tr>
+        <tr><td class="mono">id_maquina</td><td class="mono">INTEGER</td><td>FK → maquinas, NOT NULL</td></tr>
+        <tr><td class="mono">id_plan</td><td class="mono">INTEGER</td><td>FK → planes_preventivos</td></tr>
+        <tr><td class="mono">id_tecnico</td><td class="mono">INTEGER</td><td>FK → tecnicos, NOT NULL</td></tr>
+        <tr><td class="mono">fecha_emision</td><td class="mono">DATETIME</td><td>NOT NULL</td></tr>
+        <tr><td class="mono">fecha_cierre</td><td class="mono">DATETIME</td><td>—</td></tr>
+        <tr><td class="mono">estado</td><td class="mono">VARCHAR(10)</td><td>NOT NULL, CHECK (PENDIENTE, EN CURSO, CERRADA)</td></tr>
+        <tr><td class="mono">tarea</td><td class="mono">VARCHAR(200)</td><td>NOT NULL</td></tr>
+        <tr><td class="mono">horas_hombre</td><td class="mono">FLOAT</td><td>—</td></tr>
+      </table>
+      <div class="fig" style="margin-top:6px">Tabla 8. Estructura de ordenes_trabajo (las 7 tablas: Tablas 5 a 11)</div>
+    </div>
+  </div>
+  <div class="pie" data-fase="II"></div>
+</section>
+
+<!-- 12 ============ PASO 4: DER ============ -->
+<section class="slide">
+  <div class="cab">Fase II · Paso 4 — Construcción del modelo relacional<span class="orador">Gustavo Del Soto</span></div>
+  <h2 class="titulo">Diagrama entidad-relación</h2>
+  <div class="cuerpo" style="top:108px;bottom:44px;display:grid;grid-template-columns:712px 1fr;gap:28px">
+    <img src="../assets/fase2-planificacion_01.svg" alt="Diagrama entidad-relación del modelo GMAO" style="height:568px;width:auto;border:1px solid var(--linea);background:#fff">
+    <div class="col" style="justify-content:center">
+      <div class="tile"><h3>Claves visibles</h3><p><b>PK</b> en las filas sombreadas, <b>FK</b> marcadas y <b>UK</b> en códigos, legajo y número de orden.</p></div>
+      <div class="tile"><h3>Pata de gallo</h3><p>Doble barra: exactamente uno. Barra con círculo: cero o uno. Pata de gallo con círculo: cero o muchos.</p></div>
+      <div class="tile on"><h3>Relaciones opcionales</h3><p>Una falla puede quedar pendiente, sin orden; una orden correctiva no tiene plan.</p></div>
+      <div class="fig">Figura 7. DER del modelo GMAO</div>
+    </div>
+  </div>
+  <div class="pie" data-fase="II"></div>
+</section>
+
+<!-- 12b ============ PASO 4: DER, DETALLE 1 ============ -->
+<section class="slide">
+  <div class="cab">Fase II · Paso 4 — Construcción del modelo relacional<span class="orador">Gustavo Del Soto</span></div>
+  <h2 class="titulo">DER en detalle: máquinas, fallas, órdenes y técnicos</h2>
+  <div class="cuerpo" style="top:112px;bottom:44px">
+    <div class="recorte" style="width:1027px;height:540px;margin:0 auto;border:0"><img src="../assets/fase2-planificacion_01.svg" alt="DER, parte superior" style="width:1027px;left:0;top:-4px"></div>
+    <div class="fig" style="text-align:right">Figura 7 (detalle)</div>
+  </div>
+  <div class="pie" data-fase="II"></div>
+</section>
+
+<!-- 12c ============ PASO 4: DER, DETALLE 2 ============ -->
+<section class="slide">
+  <div class="cab">Fase II · Paso 4 — Construcción del modelo relacional<span class="orador">Gustavo Del Soto</span></div>
+  <h2 class="titulo">DER en detalle: planes preventivos y repuestos</h2>
+  <div class="cuerpo" style="top:112px;bottom:44px">
+    <div class="recorte" style="width:1145px;height:327px;margin:0 auto;border:0"><img src="../assets/fase2-planificacion_01.svg" alt="DER, parte inferior" style="width:1145px;left:0;top:-590px"></div>
+    <div class="fig" style="text-align:right;margin-bottom:16px">Figura 7 (detalle)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="tile"><h3>planes_preventivos → ordenes_trabajo</h3><p>Opcional: cada vencimiento del plan genera una OT preventiva; las correctivas no tienen plan.</p></div>
+      <div class="tile"><h3>ordenes_trabajo ↔ repuestos (N:M)</h3><p>Se resuelve con ot_repuestos, de clave primaria compuesta (id_ot, id_repuesto).</p></div>
+    </div>
+  </div>
+  <div class="pie" data-fase="II"></div>
+</section>
+
+<!-- 13 ============ PASO 4: RELACIONES Y REGLAS ============ -->
+<section class="slide">
+  <div class="cab">Fase II · Paso 4 — Construcción del modelo relacional<span class="orador">Gustavo Del Soto</span></div>
+  <h2 class="titulo">Relaciones del modelo y reglas del proceso</h2>
+  <div class="bajada">Tercera forma normal: cada dato se guarda una sola vez. La N:M se resuelve con una tabla intermedia.</div>
+  <div class="cuerpo" style="display:grid;grid-template-columns:600px 1fr;gap:30px">
+    <div>
+      <table class="tabla" style="font-size:17px">
+        <tr><th>Relación</th><th>Card.</th><th>Implementación</th></tr>
+        <tr><td class="mono">maquinas → fallas</td><td>1:N</td><td class="mono">fallas.id_maquina</td></tr>
+        <tr><td class="mono">maquinas → planes</td><td>1:N</td><td class="mono">planes_preventivos.id_maquina</td></tr>
+        <tr><td class="mono">maquinas → ordenes</td><td>1:N</td><td class="mono">ordenes_trabajo.id_maquina</td></tr>
+        <tr><td class="mono">ordenes → fallas</td><td>1:N opc.</td><td class="mono">fallas.id_ot (NULL)</td></tr>
+        <tr><td class="mono">planes → ordenes</td><td>1:N opc.</td><td class="mono">ordenes_trabajo.id_plan (NULL)</td></tr>
+        <tr><td class="mono">tecnicos → ordenes</td><td>1:N</td><td class="mono">ordenes_trabajo.id_tecnico</td></tr>
+        <tr><td class="mono">ordenes ↔ repuestos</td><td>N:M</td><td class="mono">tabla ot_repuestos</td></tr>
+      </table>
+      <div class="fig" style="margin-top:6px">Tabla 12. Relaciones del modelo</div>
+    </div>
+    <div class="col" style="gap:10px">
+      <div class="tile"><span class="badge">CHECK</span><p style="margin-top:6px;color:var(--tinta)">Una OT preventiva tiene plan; una correctiva no.</p></div>
+      <div class="tile"><span class="badge">TRIGGER</span><p style="margin-top:6px;color:var(--tinta)">Una OT preventiva es de la misma máquina que su plan.</p></div>
+      <div class="tile"><span class="badge">TRIGGER</span><p style="margin-top:6px;color:var(--tinta)">Una falla solo se asigna a una OT correctiva de la misma máquina.</p></div>
+      <div class="fig">Tabla 13. Reglas de integridad del proceso</div>
+      <p class="texto" style="margin:0;font-size:17px;color:var(--nota)">Un CHECK compara columnas de la misma fila; para consultar otra tabla, triggers.</p>
+    </div>
+  </div>
+  <div class="pie" data-fase="II"></div>
+</section>
+
+<!-- 14 ============ APERTURA FASE III ============ -->
+<section class="slide apertura">
+  <div class="a-izq">
+    <div class="a-kicker">Fase III</div>
+    <h1 class="a-titulo">La Construcción</h1>
+    <div class="a-desc">Implementación y carga de datos mediante SQL</div>
+    <div class="a-orador">Presenta<b>Facundo Ferrero</b></div>
+  </div>
+  <ol class="a-indice">
+    <li><span>I</span><div><b>La Investigación</b><small>Paso 1 · Conceptos de BD · Paso 2 · Entorno RDBMS</small></div></li>
+    <li><span>II</span><div><b>La Planificación</b><small>Paso 3 · Entidades y datos · Paso 4 · Diagrama DER</small></div></li>
+    <li class="on"><span>III</span><div><b>La Construcción</b><small>Paso 5 · Tablas en SQL · Paso 6 · Carga de datos</small></div></li>
+    <li><span>IV</span><div><b>La Consulta</b><small>Pasos 7, 8 y 9 · Consultas, agrupaciones y joins</small></div></li>
+  </ol>
+  <div class="pie a-pie"></div>
+</section>
+
+<!-- 15 ============ PASO 5: DDL ============ -->
+<section class="slide">
+  <div class="cab">Fase III · Paso 5 — Scripts de creación de tablas (DDL)<span class="orador">Facundo Ferrero</span></div>
+  <h2 class="titulo">CREATE TABLE escritos a mano, con sus restricciones</h2>
+  <div class="bajada">El script empieza con PRAGMA foreign_keys = ON y DROP TABLE IF EXISTS, para poder reejecutarlo.</div>
+  <div class="cuerpo" style="display:grid;grid-template-columns:420px 1fr;gap:28px">
+    <div class="col" style="gap:8px">
+      <table class="tabla" style="font-size:17px">
+        <tr><th>Restricción</th><th>Qué garantiza</th></tr>
+        <tr><td class="mono">PRIMARY KEY</td><td>Fila única, clave no vacía</td></tr>
+        <tr><td class="mono">FOREIGN KEY … REFERENCES</td><td>Integridad referencial</td></tr>
+        <tr><td class="mono">NOT NULL</td><td>Campo obligatorio</td></tr>
+        <tr><td class="mono">UNIQUE</td><td>Valor sin repetir</td></tr>
+        <tr><td class="mono">CHECK</td><td>Valor que cumple una condición</td></tr>
+      </table>
+      <div class="fig">Tabla 14</div>
+      <div class="tile"><h3>Orden de creación</h3><p>maquinas, tecnicos, repuestos → planes_preventivos, ordenes_trabajo, fallas → ot_repuestos. Al final, los 4 triggers.</p></div>
+    </div>
+<pre class="editor" data-pestana="paso5-ddl.sql" data-inicio="104" style="font-size:16px;align-self:start">
+-- ---------------------------------------------------------------------
+-- Historial de fallas (origen de las OT correctivas)
+-- ---------------------------------------------------------------------
+CREATE TABLE fallas (
+    id_falla     INTEGER       PRIMARY KEY,
+    id_maquina   INTEGER       NOT NULL,
+    id_ot        INTEGER,
+    fecha_hora   DATETIME      NOT NULL,
+    descripcion  VARCHAR(200)  NOT NULL,
+    tipo_falla   VARCHAR(15)   NOT NULL,
+    severidad    VARCHAR(5)    NOT NULL
+                 CHECK (severidad IN ('ALTA', 'MEDIA', 'BAJA')),
+    horas_parada FLOAT,
+    FOREIGN KEY (id_maquina) REFERENCES maquinas (id_maquina),
+    FOREIGN KEY (id_ot)      REFERENCES ordenes_trabajo (id_ot)
+);
+</pre>
+  </div>
+  <div class="pie" data-fase="III"></div>
+</section>
+
+<!-- 16 ============ PASO 5: EVIDENCIA EN DB BROWSER ============ -->
+<section class="slide">
+  <div class="cab">Fase III · Paso 5 — Scripts de creación de tablas (DDL)<span class="orador">Facundo Ferrero</span></div>
+  <h2 class="titulo">Ejecutado con éxito en DB Browser</h2>
+  <div class="bajada">Se ejecutó paso5-ddl.sql completo con F5 y se guardaron los cambios con Ctrl+S.</div>
+  <div class="cuerpo" style="display:grid;grid-template-columns:722px 1fr;gap:26px">
+    <div>
+      <div class="recorte" style="width:722px;height:466px"><img src="../assets/paso5_02.png" alt="Pestaña Estructura con 7 tablas y 4 disparadores" style="width:1383px;left:0;top:-95px"></div>
+      <div class="fig" style="margin-top:6px">Figura 9. Pestaña Estructura: 7 tablas y 4 disparadores</div>
+    </div>
+    <div class="col">
+      <div class="recorte" style="width:404px;height:36px"><img src="../assets/paso5_01.png" alt="Ejecución terminada sin errores" style="width:1456px;left:-6px;top:-492px"></div>
+      <div class="fig">Figura 8. Ejecución terminada sin errores</div>
+      <ul class="lista" style="margin-top:10px">
+        <li>7 tablas, con las columnas de <span class="mono">ordenes_trabajo</span> desplegadas</li>
+        <li>4 disparadores: inserción y modificación de órdenes y fallas</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pie" data-fase="III"></div>
+</section>
+
+<!-- 17 ============ PASO 6: DML ============ -->
+<section class="slide">
+  <div class="cab">Fase III · Paso 6 — Script de inserción de datos (DML)<span class="orador">Facundo Ferrero</span></div>
+  <h2 class="titulo">Datos simulados de planta, cargados con INSERT INTO</h2>
+  <div class="bajada">Orden de carga según las claves foráneas; fechas en ISO 8601; valores ausentes como NULL.</div>
+  <div class="cuerpo" style="display:grid;grid-template-columns:1fr 520px;gap:26px">
+    <div>
+      <table class="tabla" style="font-size:17px">
+        <tr><th>Tabla</th><th>Reg.</th><th>Qué permite analizar</th></tr>
+        <tr><td class="mono">maquinas</td><td>6</td><td>Distintos sectores y criticidades</td></tr>
+        <tr><td class="mono">tecnicos</td><td>5</td><td>Especialidades y turnos distintos</td></tr>
+        <tr><td class="mono">repuestos</td><td>7</td><td>Dos por debajo del stock mínimo</td></tr>
+        <tr><td class="mono">planes_preventivos</td><td>6</td><td>Por días y por horómetro</td></tr>
+        <tr><td class="mono">ordenes_trabajo</td><td>13</td><td>8 correctivas y 5 preventivas, 3 estados</td></tr>
+        <tr><td class="mono">fallas</td><td>10</td><td>El torno, el más fallado; 2 fallas en una OT; 1 pendiente</td></tr>
+        <tr><td class="mono">ot_repuestos</td><td>6</td><td>Consumos en correctivas y preventivas</td></tr>
+      </table>
+      <div class="fig" style="margin-top:6px">Tabla 15. Datos cargados</div>
+    </div>
+    <div class="col" style="gap:8px">
+<pre class="editor" data-pestana="paso6-dml.sql" data-inicio="180" style="font-size:16px">
+INSERT INTO ot_repuestos (id_ot, id_repuesto, cantidad)
+VALUES
+(1, 1, 1),
+(2, 3, 1),
+(2, 4, 1),
+(4, 5, 1),
+(7, 7, 1),
+(10, 2, 2);
+</pre>
+      <div class="recorte" style="width:440px;height:36px"><img src="../assets/paso6_01.png" alt="Ejecución terminada sin errores" style="width:1456px;left:-6px;top:-492px"></div>
+      <div class="fig">Figura 10. paso6-dml.sql ejecutado sin errores</div>
+    </div>
+  </div>
+  <div class="pie" data-fase="III"></div>
+</section>
+
+<!-- 18 ============ PASO 6: TABLAS POBLADAS (1) ============ -->
+<section class="slide">
+  <div class="cab">Fase III · Paso 6 — Script de inserción de datos (DML)<span class="orador">Facundo Ferrero</span></div>
+  <h2 class="titulo">Tablas pobladas: maquinas y ot_repuestos</h2>
+  <div class="cuerpo" style="top:112px;bottom:44px">
+    <img src="../assets/paso6_02.png" alt="Hoja de datos de maquinas" style="width:960px;display:block;border:1px solid var(--linea)">
+    <div class="fig" style="margin:4px 0 12px">Figura 11. Pestaña Hoja de datos: maquinas (6 registros)</div>
+    <div style="display:flex;gap:28px;align-items:flex-start">
+      <img src="../assets/paso6_08.png" alt="Hoja de datos de ot_repuestos" style="width:560px;display:block;border:1px solid var(--linea)">
+      <div class="fig" style="margin-top:4px">Figura 17. Pestaña Hoja de datos: ot_repuestos (6 registros)</div>
+    </div>
+  </div>
+  <div class="pie" data-fase="III"></div>
+</section>
+
+<!-- 18b ============ PASO 6: TABLAS POBLADAS (2) ============ -->
+<section class="slide">
+  <div class="cab">Fase III · Paso 6 — Script de inserción de datos (DML)<span class="orador">Facundo Ferrero</span></div>
+  <h2 class="titulo">Tablas pobladas: ordenes_trabajo</h2>
+  <div class="bajada">8 correctivas y 5 preventivas, en los tres estados. Las correctivas tienen id_plan en NULL.</div>
+  <div class="cuerpo" style="top:150px">
+    <div style="display:flex">
+      <div class="recorte" style="width:1066px;height:286px;border-right:0"><img src="../assets/paso6_06.png" alt="Hoja de datos de ordenes_trabajo" style="width:1234px;left:0;top:-34px"></div>
+      <div class="recorte" style="width:83px;height:286px;border-left:0"><img src="../assets/paso6_06.png" alt="" style="width:1234px;left:-1151px;top:-34px"></div>
+    </div>
+    <div class="fig" style="margin-top:4px">Figura 15. Pestaña Hoja de datos: ordenes_trabajo (13 registros)</div>
+  </div>
+  <div class="pie" data-fase="III"></div>
+</section>
+
+<!-- 19 ============ PASO 6: INTEGRIDAD ============ -->
+<section class="slide">
+  <div class="cab">Fase III · Paso 6 — Script de inserción de datos (DML)<span class="orador">Facundo Ferrero</span></div>
+  <h2 class="titulo">Verificación de la integridad</h2>
+  <div class="bajada">Se intentó cargar datos inválidos, aparte del script, y la base los rechazó.</div>
+  <div class="cuerpo">
+    <div class="recorte" style="width:900px;height:36px"><img src="../assets/paso6_09.png" alt="INSERT de una OT preventiva sin plan" style="width:1456px;left:-2px;top:-126px"></div>
+    <div class="recorte" style="width:900px;height:90px;margin-top:4px"><img src="../assets/paso6_09.png" alt="CHECK constraint failed" style="width:1456px;left:-2px;top:-488px"></div>
+    <div class="fig" style="margin-top:4px">Figura 18. DB Browser rechaza la OT preventiva sin plan</div>
+    <table class="tabla" style="margin-top:12px;font-size:17px">
+      <tr><th>Intento</th><th>Mensaje de SQLite</th></tr>
+      <tr><td>OT preventiva sin plan</td><td class="mono">CHECK constraint failed</td></tr>
+      <tr><td>OT preventiva de otra máquina que su plan</td><td class="mono">La OT preventiva debe ser de la misma maquina que su plan</td></tr>
+      <tr><td>Falla asignada a una OT preventiva</td><td class="mono">La falla solo se asigna a una OT correctiva de la misma maquina</td></tr>
+      <tr><td>Falla de una máquina inexistente</td><td class="mono">FOREIGN KEY constraint failed</td></tr>
+      <tr><td>Número de OT repetido</td><td class="mono">UNIQUE constraint failed: ordenes_trabajo.nro_ot</td></tr>
+      <tr><td>Máquina sin nombre</td><td class="mono">NOT NULL constraint failed: maquinas.nombre</td></tr>
+      <tr><td>Borrar una máquina con historial</td><td class="mono">FOREIGN KEY constraint failed</td></tr>
+    </table>
+  </div>
+  <div class="pie" data-fase="III"></div>
+</section>
+
+<!-- 20 ============ APERTURA FASE IV ============ -->
+<section class="slide apertura">
+  <div class="a-izq">
+    <div class="a-kicker">Fase IV</div>
+    <h1 class="a-titulo">La Consulta</h1>
+    <div class="a-desc">Explotación de datos y reportes industriales</div>
+    <div class="a-orador">Presentan<b>Facundo Ferrero · Gonzalo Vera</b></div>
+  </div>
+  <ol class="a-indice">
+    <li><span>I</span><div><b>La Investigación</b><small>Paso 1 · Conceptos de BD · Paso 2 · Entorno RDBMS</small></div></li>
+    <li><span>II</span><div><b>La Planificación</b><small>Paso 3 · Entidades y datos · Paso 4 · Diagrama DER</small></div></li>
+    <li><span>III</span><div><b>La Construcción</b><small>Paso 5 · Tablas en SQL · Paso 6 · Carga de datos</small></div></li>
+    <li class="on"><span>IV</span><div><b>La Consulta</b><small>Pasos 7, 8 y 9 · Consultas, agrupaciones y joins</small></div></li>
+  </ol>
+  <div class="pie a-pie"></div>
+</section>
+
+<!-- 21 ============ CONSULTA 7.1 ============ -->
+<section class="slide">
+  <div class="cab">Fase IV · Paso 7 — Selección y filtrado básico<span class="orador">Facundo Ferrero</span></div>
+  <h2 class="titulo">Consulta 7.1 — Fallas entre dos fechas</h2>
+  <div class="bajada">Necesidad: el supervisor revisa las fallas importantes de un período. BETWEEN, IN y AND.</div>
+  <div class="cuerpo">
+    <div style="display:grid;grid-template-columns:760px 1fr;gap:24px">
+<pre class="editor" data-inicio="5" style="font-size:15px">
+SELECT id_falla, fecha_hora, id_maquina, descripcion, tipo_falla,
+       severidad, horas_parada
+FROM fallas
+WHERE fecha_hora BETWEEN '2026-09-15 00:00:00' AND '2026-10-10 23:59:59'
+  AND severidad IN ('ALTA', 'MEDIA')
+ORDER BY fecha_hora;
+</pre>
+      <div class="res"><h3>Resultado</h3><p>Cinco fallas entre el 15/09 y el 10/10. La de la inyectora (12/10) queda afuera por la fecha y por su severidad baja.</p></div>
+    </div>
+    <div class="recorte" style="width:1141px;height:156px;margin-top:14px"><img src="../assets/paso7_01.png" alt="Resultado de la consulta 7.1" style="width:1602px;left:0;top:-411px"></div>
+    <div class="fig" style="margin-top:4px">Figura 19. Consulta 7.1 en Ejecutar SQL: 5 filas</div>
+  </div>
+  <div class="pie" data-fase="IV"></div>
+</section>
+
+<!-- 22 ============ CONSULTA 7.2 ============ -->
+<section class="slide">
+  <div class="cab">Fase IV · Paso 7 — Selección y filtrado básico<span class="orador">Facundo Ferrero</span></div>
+  <h2 class="titulo">Consulta 7.2 — Repuestos con stock crítico</h2>
+  <div class="bajada">Necesidad: el pañol tiene que saber qué reponer antes de que una falla deje una máquina parada.</div>
+  <div class="cuerpo">
+    <div style="display:grid;grid-template-columns:700px 1fr;gap:24px">
+<pre class="editor" data-inicio="6" style="font-size:16px">
+SELECT codigo, descripcion, stock_actual, stock_minimo,
+       stock_minimo - stock_actual AS faltante
+FROM repuestos
+WHERE stock_actual &lt;= stock_minimo
+ORDER BY faltante DESC, codigo;
+</pre>
+      <div class="res"><h3>Resultado</h3><p>Cuatro repuestos: el filtro del compresor y la placa SMB del robot por debajo del mínimo; la correa y el kit de sellos, justo en el mínimo.</p></div>
+    </div>
+    <div class="recorte" style="width:1000px;height:142px;margin-top:14px"><img src="../assets/paso7_02.png" alt="Resultado de la consulta 7.2" style="width:1741px;left:0;top:-447px"></div>
+    <div class="fig" style="margin-top:4px">Figura 20. Consulta 7.2 en Ejecutar SQL: 4 filas</div>
+  </div>
+  <div class="pie" data-fase="IV"></div>
+</section>
+
+<!-- 23 ============ CONSULTA 7.3 ============ -->
+<section class="slide">
+  <div class="cab">Fase IV · Paso 7 — Selección y filtrado básico<span class="orador">Facundo Ferrero</span></div>
+  <h2 class="titulo">Consulta 7.3 — Órdenes correctivas abiertas</h2>
+  <div class="bajada">Necesidad: el supervisor sigue a diario las máquinas con una falla sin resolver. NOT excluye las cerradas.</div>
+  <div class="cuerpo">
+    <div style="display:grid;grid-template-columns:700px 1fr;gap:24px">
+<pre class="editor" data-inicio="5" style="font-size:15px">
+SELECT nro_ot, fecha_emision, id_maquina, id_tecnico, estado, tarea
+FROM ordenes_trabajo
+WHERE tipo = 'CORRECTIVA'
+  AND NOT estado = 'CERRADA'
+ORDER BY fecha_emision;
+</pre>
+      <div class="res"><h3>Resultado</h3><p>Dos órdenes abiertas: el rodamiento del torno CNC, en curso, y el cambiador de herramientas del centro de mecanizado, pendiente.</p></div>
+    </div>
+    <div class="recorte" style="width:1142px;height:76px;margin-top:14px"><img src="../assets/paso7_03.png" alt="Resultado de la consulta 7.3" style="width:1532px;left:0;top:-393px"></div>
+    <div class="fig" style="margin-top:4px">Figura 21. Consulta 7.3 en Ejecutar SQL: 2 filas</div>
+  </div>
+  <div class="pie" data-fase="IV"></div>
+</section>
+
+<!-- 24 ============ CONSULTA 8.1 ============ -->
+<section class="slide">
+  <div class="cab">Fase IV · Paso 8 — Agrupación y estadísticas<span class="orador">Gonzalo Vera</span></div>
+  <h2 class="titulo">Consulta 8.1 — Fallas por máquina</h2>
+  <div class="bajada">COUNT, SUM y MAX con GROUP BY: cantidad de fallas y horas de parada de cada máquina.</div>
+  <div class="cuerpo">
+    <div style="display:grid;grid-template-columns:620px 1fr;gap:24px">
+<pre class="editor" data-inicio="5" style="font-size:16px">
+SELECT id_maquina,
+       COUNT(*)          AS cantidad_fallas,
+       SUM(horas_parada) AS horas_parada_total,
+       MAX(fecha_hora)   AS ultima_falla
+FROM fallas
+GROUP BY id_maquina
+ORDER BY cantidad_fallas DESC, horas_parada_total DESC;
+</pre>
+      <div class="res"><h3>Resultado</h3><p>La máquina 1, el <b>torno CNC</b>, es el activo más crítico: 3 fallas y 10,5 h de parada, todas en el husillo. Le siguen la prensa (5) y el robot (4).</p></div>
+    </div>
+    <div class="recorte" style="width:594px;height:198px;margin-top:12px"><img src="../assets/paso8_01.png" alt="Resultado de la consulta 8.1" style="width:1741px;left:-12px;top:-447px"></div>
+    <div class="fig" style="margin-top:4px">Figura 22. Consulta 8.1 en Ejecutar SQL: 6 filas</div>
+  </div>
+  <div class="pie" data-fase="IV"></div>
+</section>
+
+<!-- 25 ============ CONSULTA 8.2 ============ -->
+<section class="slide">
+  <div class="cab">Fase IV · Paso 8 — Agrupación y estadísticas<span class="orador">Gonzalo Vera</span></div>
+  <h2 class="titulo">Consulta 8.2 — Horas-hombre por tipo de mantenimiento</h2>
+  <div class="bajada">Comparar el esfuerzo dedicado al correctivo y al preventivo.</div>
+  <div class="cuerpo">
+    <div style="display:grid;grid-template-columns:620px 1fr;gap:24px">
+<pre class="editor" data-inicio="5" style="font-size:15px">
+SELECT tipo,
+       COUNT(*)                    AS cantidad_ot,
+       SUM(horas_hombre)           AS horas_hombre_total,
+       ROUND(AVG(horas_hombre), 2) AS horas_hombre_promedio,
+       MAX(horas_hombre)           AS horas_hombre_maxima
+FROM ordenes_trabajo
+GROUP BY tipo
+ORDER BY horas_hombre_total DESC;
+</pre>
+      <div class="res"><h3>Resultado</h3><p>El correctivo concentra 8 órdenes y 23,25 h, el <b>77,5 %</b> de las 30 horas registradas; el preventivo, 5 órdenes y 6,75 h. Las dos pendientes no suman horas: AVG y SUM ignoran los NULL.</p></div>
+    </div>
+    <div class="recorte" style="width:766px;height:86px;margin-top:12px"><img src="../assets/paso8_02.png" alt="Resultado de la consulta 8.2" style="width:1741px;left:-12px;top:-447px"></div>
+    <div class="fig" style="margin-top:4px">Figura 23. Consulta 8.2 en Ejecutar SQL: 2 filas</div>
+  </div>
+  <div class="pie" data-fase="IV"></div>
+</section>
+
+<!-- 26 ============ CONSULTA 9.1 ============ -->
+<section class="slide">
+  <div class="cab">Fase IV · Paso 9 — Integración de tablas (JOINs)<span class="orador">Gonzalo Vera</span></div>
+  <h2 class="titulo">Consulta 9.1 — Órdenes con máquina, falla y técnico</h2>
+  <div class="bajada">El operador de planta no lee códigos numéricos: el reporte muestra nombres.</div>
+  <div class="cuerpo" style="display:grid;grid-template-columns:700px 1fr;gap:26px">
+<pre class="editor" data-inicio="6" style="font-size:15px;align-self:start">
+SELECT ot.nro_ot,
+       ot.tipo,
+       m.nombre                            AS maquina,
+       COALESCE(f.descripcion,
+                'Plan ' || p.codigo || ': ' || p.tarea) AS motivo,
+       t.apellido || ', ' || t.nombre      AS tecnico,
+       ot.estado
+FROM ordenes_trabajo AS ot
+INNER JOIN maquinas AS m           ON m.id_maquina = ot.id_maquina
+INNER JOIN tecnicos AS t           ON t.id_tecnico = ot.id_tecnico
+LEFT JOIN fallas AS f              ON f.id_ot = ot.id_ot
+LEFT JOIN planes_preventivos AS p  ON p.id_plan = ot.id_plan
+ORDER BY ot.nro_ot, f.fecha_hora;
+</pre>
+    <div class="col">
+      <div class="tile"><span class="badge">INNER JOIN</span><p style="margin-top:6px">Máquina y técnico: obligatorios en toda orden.</p></div>
+      <div class="tile"><span class="badge gris">LEFT JOIN</span><p style="margin-top:6px">Falla y plan dependen del tipo de orden. Con INNER se perderían las 5 preventivas.</p></div>
+      <div class="tile"><span class="badge claro">COALESCE</span><p style="margin-top:6px">Muestra en una columna la falla o la tarea del plan.</p></div>
+    </div>
+  </div>
+  <div class="pie" data-fase="IV"></div>
+</section>
+
+<!-- 27 ============ RESULTADO 9.1 (1) ============ -->
+<section class="slide">
+  <div class="cab">Fase IV · Paso 9 — Integración de tablas (JOINs)<span class="orador">Gonzalo Vera</span></div>
+  <h2 class="titulo">Consulta 9.1 — El reporte legible</h2>
+  <div class="bajada">14 filas para 13 órdenes: la OT-2026-0107 atiende dos fallas de la prensa y aparece dos veces.</div>
+  <div class="cuerpo" style="display:grid;grid-template-columns:560px 1fr;gap:30px">
+    <div>
+      <div class="recorte" style="width:560px;height:422px"><img src="../assets/paso9_01.png" alt="Resultado de la consulta 9.1: orden, tipo y máquina" style="width:1741px;left:-14px;top:-447px"></div>
+      <div class="fig" style="margin-top:4px">Figura 24 (parte 1): orden, tipo y máquina</div>
+    </div>
+    <div class="col" style="justify-content:center">
+      <div class="res"><h3>Resultado</h3><p>Cada orden con el nombre de la máquina, el motivo y el técnico, en lugar de sus identificadores.</p></div>
+      <div class="res"><h3>Falla pendiente</h3><p>La falla de la inyectora no figura: todavía no tiene orden, y la consulta parte de las órdenes.</p></div>
+    </div>
+  </div>
+  <div class="pie" data-fase="IV"></div>
+</section>
+
+<!-- 27b ============ RESULTADO 9.1 (2) ============ -->
+<section class="slide">
+  <div class="cab">Fase IV · Paso 9 — Integración de tablas (JOINs)<span class="orador">Gonzalo Vera</span></div>
+  <h2 class="titulo">Consulta 9.1 — Motivo, técnico y estado</h2>
+  <div class="bajada">Para las correctivas, la falla; para las preventivas, la tarea del plan (COALESCE).</div>
+  <div class="cuerpo">
+    <div style="display:flex">
+      <div class="recorte" style="width:27px;height:412px;border-right:0"><img src="../assets/paso9_01.png" alt="" style="width:1697px;left:-14px;top:-436px"></div>
+      <div class="recorte" style="width:1125px;height:412px;border-left:0"><img src="../assets/paso9_01.png" alt="Resultado de la consulta 9.1: motivo, técnico y estado" style="width:1697px;left:-557px;top:-436px"></div>
+    </div>
+    <div class="fig" style="margin-top:4px">Figura 24 (parte 2): motivo, técnico y estado</div>
+  </div>
+  <div class="pie" data-fase="IV"></div>
+</section>
+
+<!-- 28 ============ CONSULTA 9.2 ============ -->
+<section class="slide">
+  <div class="cab">Fase IV · Paso 9 — Integración de tablas (JOINs)<span class="orador">Gonzalo Vera</span></div>
+  <h2 class="titulo">Consulta 9.2 — Repuestos consumidos por orden</h2>
+  <div class="bajada">Parte de la tabla intermedia ot_repuestos; el costo se calcula como cantidad × costo unitario.</div>
+  <div class="cuerpo">
+    <div style="display:grid;grid-template-columns:690px 1fr;gap:24px">
+<pre class="editor" data-compacto data-inicio="5" style="font-size:15px">
+SELECT ot.nro_ot,
+       m.nombre                        AS maquina,
+       r.descripcion                   AS repuesto,
+       otr.cantidad,
+       r.costo_unitario,
+       otr.cantidad * r.costo_unitario AS costo_total
+FROM ot_repuestos AS otr
+INNER JOIN ordenes_trabajo AS ot ON ot.id_ot = otr.id_ot
+INNER JOIN maquinas AS m         ON m.id_maquina = ot.id_maquina
+INNER JOIN repuestos AS r        ON r.id_repuesto = otr.id_repuesto
+ORDER BY ot.nro_ot, r.descripcion;
+</pre>
+      <div class="res"><h3>Resultado</h3><p>Seis consumos por $ 2.396.100. La placa SMB del robot ($ 1.850.000) explica el 77 % del gasto, y su stock quedó en cero (consulta 7.2).</p></div>
+    </div>
+    <div class="recorte" style="width:1148px;height:187px;margin-top:12px"><img src="../assets/paso9_02.png" alt="Resultado de la consulta 9.2" style="width:1645px;left:0;top:-422px"></div>
+    <div class="fig" style="margin-top:4px">Figura 25. Consulta 9.2 en Ejecutar SQL: 6 filas</div>
+  </div>
+  <div class="pie" data-fase="IV"></div>
+</section>
+
+<!-- 29 ============ CHECK-LIST DEL ENUNCIADO ============ -->
+<section class="slide">
+  <div class="cab">Cierre · Tabla de control del enunciado<span class="orador">Gonzalo Vera</span></div>
+  <h2 class="titulo">Los nueve pasos, en el informe técnico</h2>
+  <div class="bajada">Cada paso con justificación, procedimiento y capturas; todo el SQL, además, en tp3-gmao.sql.</div>
+  <div class="cuerpo">
+    <table class="tabla control" style="font-size:17px">
+      <tr><th>Fase</th><th>Paso</th><th>Tarea</th><th>Evidencia en el informe</th><th>Págs.</th></tr>
+      <tr><td>I</td><td>1</td><td>Conceptos de BD</td><td>Clasificación (Tabla 1), ISA-95 (Fig. 2), tres usos</td><td class="ok">5–8</td></tr>
+      <tr><td>I</td><td>2</td><td>Entorno RDBMS</td><td>SQLite, requisitos (Tablas 2–3), DB Browser (Figs. 3–6)</td><td class="ok">8–13</td></tr>
+      <tr><td>II</td><td>3</td><td>Entidades y datos</td><td>Tipos (Tabla 4) y estructura de las 7 tablas (Tablas 5–11)</td><td class="ok">14–20</td></tr>
+      <tr><td>II</td><td>4</td><td>Diagrama DER</td><td>DER con PK y FK (Fig. 7), relaciones y reglas (Tablas 12–13)</td><td class="ok">20–23</td></tr>
+      <tr><td>III</td><td>5</td><td>Tablas en SQL</td><td>CREATE TABLE y triggers; ejecución y estructura (Figs. 8–9)</td><td class="ok">24–29</td></tr>
+      <tr><td>III</td><td>6</td><td>Carga de datos</td><td>INSERT INTO; tablas pobladas e integridad (Figs. 10–18)</td><td class="ok">30–37</td></tr>
+      <tr><td>IV</td><td>7</td><td>Consultas básicas</td><td>3 consultas con WHERE y ORDER BY (Figs. 19–21)</td><td class="ok">38–42</td></tr>
+      <tr><td>IV</td><td>8</td><td>Agrupaciones</td><td>2 consultas con GROUP BY (Figs. 22–23)</td><td class="ok">42–45</td></tr>
+      <tr><td>IV</td><td>9</td><td>Joins avanzados</td><td>2 consultas con INNER y LEFT JOIN (Figs. 24–25)</td><td class="ok">45–47</td></tr>
+    </table>
+  </div>
+  <div class="pie" data-fase=""></div>
+</section>
+
+<!-- 30 ============ ANEXO: IMPLEMENTACIÓN ============ -->
+<section class="slide">
+  <div class="cab">Anexo · Implementación<span class="orador">Gonzalo Vera</span></div>
+  <h2 class="titulo">Anexo: el modelo en una aplicación web</h2>
+  <div class="bajada">Implementación complementaria del grupo; no forma parte de los entregables.</div>
+  <div class="cuerpo" style="display:grid;grid-template-columns:780px 1fr;gap:28px">
+    <div class="recorte" style="width:780px;height:488px"><img src="sitio-resumen.png" alt="Pantalla de resumen de la aplicación GMAO" style="width:780px;left:0;top:0"></div>
+    <div style="display:flex;gap:24px;align-items:flex-start">
+      <div class="col" style="gap:10px">
+        <div id="qr" style="border:1px solid var(--linea);background:#fff;padding:6px"></div>
+        <div class="grande mono" style="font-size:22px;color:var(--acento)">gmao.24hs.click</div>
+        <p class="texto" style="margin:0;font-size:17px;color:var(--nota)">Las mismas 7 tablas, las reglas del modelo, los datos del TP y las 7 consultas. Consulta pública.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pie" data-fase=""></div>
+</section>
+
+<!-- 31 ============ PREGUNTAS ============ -->
+<section class="slide portada final">
+  <svg class="p-esquema" width="520" height="560" viewBox="0 0 520 560" fill="none" stroke-width="1.5">
+    <g class="trazo">
+      <rect x="20" y="20" width="150" height="100" rx="3"/><path d="M20 46 H170"/>
+      <rect x="340" y="20" width="150" height="100" rx="3"/><path d="M340 46 H490"/>
+      <rect x="20" y="230" width="150" height="110" rx="3"/><path d="M20 256 H170"/>
+      <rect x="340" y="220" width="150" height="140" rx="3"/><path d="M340 246 H490"/>
+      <rect x="20" y="440" width="150" height="100" rx="3"/><path d="M20 466 H170"/>
+      <rect x="340" y="440" width="150" height="100" rx="3"/><path d="M340 466 H490"/>
+      <rect x="200" y="140" width="110" height="64" rx="3"/><path d="M200 166 H310"/>
+      <path d="M95 120 V230 M170 70 H340 M415 120 V220 M170 290 H340 M415 360 V440 M95 340 V440 M170 490 H340 M255 140 V70"/>
+    </g>
+  </svg>
+  <div class="p-kicker">Gracias</div>
+  <h1>¿Preguntas?</h1>
+  <div class="p-pie">
+    <div><span>Docente</span>Ing. Carolina Rivarola</div>
+    <div><span>Grupo Nº 4</span>Emiliano Casali · Gustavo Del Soto · Facundo Ferrero · Gonzalo Vera</div>
+    <div><span>Entregables</span>tp3-gmao-informe.pdf · tp3-gmao.sql</div>
+  </div>
+</section>
+
+<script src="resaltar.js"></script>
+<script src="armar.js"></script>
+<script>
+  // Código QR al sitio de la implementación (anexo)
+  (function () {
+    const qr = qrcode(0, "M");
+    qr.addData("https://gmao.24hs.click/");
+    qr.make();
+    document.getElementById("qr").innerHTML = qr.createSvgTag({ cellSize: 8, margin: 2, scalable: true });
+  })();
+</script>
+</body>
+</html>

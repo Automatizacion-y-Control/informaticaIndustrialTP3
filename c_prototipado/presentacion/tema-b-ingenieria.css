@@ -1,0 +1,53 @@
+/* Opción B — Ingeniería: gris cálido muy claro, IBM Plex, acento verde petróleo, grilla técnica. */
+:root {
+  --papel: #F6F6F3; --tinta: #1B1E22; --nota: #5E656E; --linea: #D8DBD5;
+  --codigo: #EBECE7; --barra: #C3CBC8; --acento: #0E6B63;
+  --f-tit: "IBM Plex Sans", Arial, sans-serif; --f-txt: "IBM Plex Sans", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", Consolas, monospace;
+  --peso-tit: 600; --track-tit: -0.01em;
+}
+.cab { font-family: var(--f-mono); font-weight: 500; }
+.rotulo, .pie { font-family: var(--f-mono); }
+/* Portada: grilla de plano a la derecha con el esquema del modelo */
+.portada::after { content: ""; position: absolute; left: 700px; right: 0; top: 0; bottom: 0;
+  background-image: linear-gradient(var(--linea) 1px, transparent 1px), linear-gradient(90deg, var(--linea) 1px, transparent 1px);
+  background-size: 32px 32px; opacity: .7; }
+.portada .p-esquema { position: absolute; left: 730px; top: 50px; z-index: 1; }
+.portada .p-esquema .trazo { stroke: var(--acento); }
+.portada .p-inst { position: absolute; left: 80px; top: 64px; font-size: 17px; line-height: 1.6; color: var(--nota); }
+.portada .p-inst b { color: var(--tinta); font-weight: 600; }
+.portada .p-kicker { position: absolute; left: 80px; top: 196px; font-family: var(--f-mono); font-size: 17px;
+                     color: var(--acento); letter-spacing: .04em; text-transform: uppercase; }
+.portada .p-titulo { position: absolute; left: 80px; top: 226px; width: 580px; margin: 0;
+                     font-size: 44px; font-weight: 600; line-height: 1.12; letter-spacing: -0.015em; }
+.portada .p-sub { position: absolute; left: 80px; top: 436px; width: 600px; font-size: 20px; line-height: 1.4; color: var(--nota); }
+/* Pie como cuadro de rótulo de plano */
+.portada .p-pie { position: absolute; left: 80px; bottom: 56px; width: 580px; display: grid;
+                  grid-template-columns: 1fr 1fr; border: 1.5px solid var(--tinta); font-size: 17px; }
+.portada .p-pie div { padding: 8px 12px; border-right: 1px solid var(--tinta); }
+.portada .p-pie div:nth-child(2) { grid-column: 1 / 3; grid-row: 1; border-bottom: 1px solid var(--tinta); border-right: 0; }
+.portada .p-pie div:nth-child(3) { border-right: 0; }
+.portada .p-pie span { display: block; font-family: var(--f-mono); font-size: 13px; color: var(--nota);
+                       text-transform: uppercase; letter-spacing: .06em; margin-bottom: 2px; }
+/* Apertura de fase */
+.apertura::after { content: ""; position: absolute; left: 0; right: 0; top: 0; bottom: 0; pointer-events: none;
+  background-image: linear-gradient(var(--linea) 1px, transparent 1px), linear-gradient(90deg, var(--linea) 1px, transparent 1px);
+  background-size: 32px 32px; opacity: .35; }
+.apertura .a-izq { position: absolute; left: 80px; top: 0; bottom: 0; width: 560px; z-index: 1; }
+.apertura .a-num { display: none; }
+.apertura .a-kicker { position: absolute; top: 210px; font-family: var(--f-mono); color: var(--acento); font-size: 19px; text-transform: uppercase; }
+.apertura .a-titulo { position: absolute; top: 240px; margin: 0; font-size: 64px; font-weight: 600; }
+.apertura .a-desc { position: absolute; top: 330px; font-size: 24px; color: var(--nota); }
+.apertura .a-orador { position: absolute; top: 440px; font-family: var(--f-mono); font-size: 16px; color: var(--nota); text-transform: uppercase; }
+.apertura .a-orador b { display: block; font-family: var(--f-txt); font-size: 28px; color: var(--tinta);
+                        text-transform: none; margin-top: 6px; font-weight: 600; }
+.apertura .a-indice { position: absolute; left: 700px; right: 80px; top: 170px; margin: 0; padding: 0; list-style: none; z-index: 1; }
+.apertura .a-indice li { display: flex; gap: 18px; padding: 16px 18px; margin-bottom: 10px; background: var(--papel);
+                         border: 1px solid var(--linea); color: var(--nota); }
+.apertura .a-indice li span { font-family: var(--f-mono); width: 34px; }
+.apertura .a-indice li b { display: block; font-size: 23px; font-weight: 600; }
+.apertura .a-indice li small { font-size: 17px; }
+.apertura .a-indice li.on { border: 1.5px solid var(--acento); color: var(--tinta); border-left-width: 6px; }
+.apertura .a-indice li.on span { color: var(--acento); }
+.apertura .pie { z-index: 1; }
+.portada .p-sep { display: none; } .portada .p-caso { display: block; }

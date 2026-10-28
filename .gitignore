@@ -43,3 +43,6 @@ venv/
 *.sqlite3-journal
 *.sqlite3-wal
 *.sqlite3-shm
+
+# Material de la exposición oral (notas de los oradores, miniaturas y opciones de diseño)
+d_presentacion/exposicion/
